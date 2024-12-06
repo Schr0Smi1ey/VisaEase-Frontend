@@ -1,12 +1,22 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useParams,
+} from "react-router-dom";
 import Root from "./Components/Layout/Root.jsx";
 import AuthProvider from "./Contexts/AuthContext/AuthProvider.jsx";
 import Home from "./Components/Pages/Home/Home.jsx";
 import Login from "./Components/Forms/LogIn.jsx";
 import SignUp from "./Components/Forms/SignUp.jsx";
+import AllVisa from "./Components/Pages/AllVisa/AllVisa.jsx";
+import AddVisa from "./Components/Forms/addVisa.jsx";
+import MyVisas from "./Components/Pages/MyVisas/MyVisas.jsx";
+import MyApplication from "./Components/Pages/MyApplications/MyApplications.jsx";
+import PrivateRoute from "./PrivateRoute/PrivateRoute.jsx";
+import VisaDetails from "./Components/Pages/VisaDetails/VisaDetails.jsx";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +34,44 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/all-visas",
+        element: <AllVisa></AllVisa>,
+      },
+      {
+        path: "/add-visa",
+        element: (
+          <PrivateRoute>
+            <AddVisa></AddVisa>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-visa",
+        element: (
+          <PrivateRoute>
+            <MyVisas></MyVisas>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-applications",
+        element: (
+          <PrivateRoute>
+            <MyApplication></MyApplication>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/visa-details/:id",
+        element: (
+          <PrivateRoute>
+            <VisaDetails />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/Visa/${params.id}`),
       },
     ],
   },

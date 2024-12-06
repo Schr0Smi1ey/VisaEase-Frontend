@@ -68,7 +68,7 @@ const NavBar = () => {
       <NavLink onClick={toggleMenuDropdown} to="/my-visa">
         <span className="block text-center">My Visas</span>
       </NavLink>
-      <NavLink onClick={toggleMenuDropdown} to="/my-application">
+      <NavLink onClick={toggleMenuDropdown} to="/my-applications">
         <span className="block text-center">My Applications</span>
       </NavLink>
       {user && (
@@ -169,7 +169,7 @@ const NavBar = () => {
           <div className="modal-action justify-between flex mx-auto items-center">
             <button
               onClick={hideSignOutModal}
-              className="px-4 py-2 bg-primary font-semibold text-base rounded-lg hover:bg-gray-300"
+              className="px-4 py-2 bg-green-500 font-semibold text-base rounded-lg hover:bg-gray-300"
             >
               Cancel
             </button>
