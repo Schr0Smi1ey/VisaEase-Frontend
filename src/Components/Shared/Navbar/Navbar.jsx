@@ -2,12 +2,15 @@ import { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
+import { FaSun, FaMoon } from "react-icons/fa";
 const NavBar = () => {
   const { user, signOutUser, Toast, setLoading } = useContext(AuthContext);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scroll, setScroll] = useState(false);
   const navigate = useNavigate();
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -20,6 +23,14 @@ const NavBar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
   const toggleMenuDropdown = () => {
     setIsMenuOpen(!isMenuOpen);
     setIsProfileOpen(false);
@@ -146,6 +157,18 @@ const NavBar = () => {
             Sign Up
           </Link>
         )}
+      </div>
+      <div>
+        <button
+          onClick={toggleTheme}
+          className="p-2 bg-gray-200 dark:bg-gray-800 rounded-full"
+        >
+          {theme == "light" ? (
+            <FaMoon className="text-gray-800 dark:text-yellow-500 text-xl" />
+          ) : (
+            <FaSun className="text-yellow-500 dark:text-gray-200 text-xl" />
+          )}
+        </button>
       </div>
     </div>
   );

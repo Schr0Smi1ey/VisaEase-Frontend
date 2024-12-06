@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 const LatestVisas = () => {
   const [visas, setVisas] = useState([]);
   const navigate = useNavigate();

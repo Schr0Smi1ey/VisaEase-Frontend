@@ -5,7 +5,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 
-const ExSec1 = () => {
+const BestDestinations = () => {
   const destinations = [
     {
       id: 1,
@@ -40,7 +40,7 @@ const ExSec1 = () => {
   ];
 
   return (
-    <div className="bg-gradient-to-t from-white to-gray-50 py-12">
+    <div className="py-12">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-extrabold text-gray-800 mb-4 text-center">
           Most Popular Destinations
@@ -52,7 +52,7 @@ const ExSec1 = () => {
         <Swiper
           modules={[Navigation, Pagination]}
           spaceBetween={20}
-          slidesPerView={3}
+          slidesPerView={1}
           navigation
           pagination={{ clickable: true }}
           breakpoints={{
@@ -84,4 +84,4 @@ const ExSec1 = () => {
   );
 };
 
-export default ExSec1;
+export default BestDestinations;

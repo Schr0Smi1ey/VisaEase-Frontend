@@ -11,20 +11,18 @@ const VisaCard = ({ visa }) => {
         className="rounded-t-lg object-cover h-3/4"
       />
       <div className="p-4 flex flex-col">
-        <div className=" border-2 border-red-600">
-          <h2 className="text-xl font-semibold text-primary mb-2">
-            {countryName}
-          </h2>
-          <p className="text-sm text-gray-600 mb-2">
-            <span className="font-medium">Visa Type:</span> {visaType}
-          </p>
-          <p className="text-sm text-gray-600 mb-2">
-            <span className="font-medium">Fee:</span> ${fee}
-          </p>
-          <p className="text-sm text-gray-600 mb-4">
-            <span className="font-medium">Validity:</span> {validity}
-          </p>
-        </div>
+        <h2 className="text-xl font-semibold text-primary mb-2">
+          {countryName}
+        </h2>
+        <p className="text-sm text-gray-600 mb-2">
+          <span className="font-medium">Visa Type:</span> {visaType}
+        </p>
+        <p className="text-sm text-gray-600 mb-2">
+          <span className="font-medium">Fee:</span> ${fee}
+        </p>
+        <p className="text-sm text-gray-600 mb-4">
+          <span className="font-medium">Validity:</span> {validity}
+        </p>
         <div className="flex-grow-1">
           <Link
             to={`/visa-details/${visa._id}`}

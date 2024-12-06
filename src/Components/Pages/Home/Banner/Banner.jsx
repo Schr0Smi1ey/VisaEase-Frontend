@@ -6,6 +6,15 @@ import slide2 from "../../../../Assets/Slide2.jpg";
 import slide3 from "../../../../Assets/Slide3.jpg";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import {
+  Bounce,
+  Fade,
+  Flip,
+  Hinge,
+  JackInTheBox,
+  Roll,
+  Slide,
+} from "react-awesome-reveal";
 
 const Banner = () => {
   const sliderContent = [
@@ -82,7 +91,7 @@ const Banner = () => {
                   className="font-bold text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-5"
                   data-aos="fade-left"
                 >
-                  {title}
+                  <Slide direction="right">{title}</Slide>
                 </h1>
                 <p
                   className="font-normal text-base text-gray-800 mb-6"

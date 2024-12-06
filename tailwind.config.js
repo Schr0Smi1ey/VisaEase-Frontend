@@ -5,6 +5,10 @@ export default {
     extend: {
       colors: {
         primary: "#FF6363",
+        theme: {
+          light: "#3b82f6", // Light theme primary color
+          dark: "#1e40af", // Dark theme primary color
+        },
       },
     },
   },

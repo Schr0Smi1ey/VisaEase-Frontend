@@ -15,7 +15,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <div className="bg-gray-100 p-10">
+    <div className="p-10">
       <div className="container mx-auto">
         {/* Branding */}
         <div data-aos="fade-down" className="text-center">

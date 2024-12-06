@@ -10,7 +10,7 @@ import Qatar_Airways from "../../../../assets/Qatar_airways.png";
 import Malaysia_Airlines from "../../../../assets/Malaysia_Airlines.jpg";
 import Etihad_Airways from "../../../../assets/Etihad_airways.jpg";
 import Cathay_Pacific_Airways from "../../../../assets/Cathay_Pacific_Airways.jpg";
-const ExSec2 = () => {
+const Airlines = () => {
   // Mock data for airlines
   const airlines = [
     {
@@ -71,7 +71,7 @@ const ExSec2 = () => {
   ];
 
   return (
-    <div className="bg-gray-50 py-12">
+    <div className="py-12">
       <div className="container mx-auto px-6 text-center">
         {/* Section Header */}
         <h2 className="text-3xl font-extrabold text-gray-800 mb-4">
@@ -108,4 +108,4 @@ const ExSec2 = () => {
   );
 };
 
-export default ExSec2;
+export default Airlines;
