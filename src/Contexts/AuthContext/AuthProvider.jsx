@@ -57,12 +57,7 @@ const AuthProvider = ({ children }) => {
       photoURL: photoURL,
     });
   };
-  const resetPassword = (email) => {
-    return sendPasswordResetEmail(auth, email);
-  };
-
   const Toast = (message, type) => {
-    console.log(message, type);
     toast[type](message, {
       position: "top-center",
       autoClose: 1500,
@@ -88,7 +83,6 @@ const AuthProvider = ({ children }) => {
     loading,
     setLoading,
     Toast,
-    resetPassword,
     theme,
     setTheme,
     toggleTheme,

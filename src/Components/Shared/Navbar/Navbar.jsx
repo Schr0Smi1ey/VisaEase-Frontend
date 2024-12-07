@@ -65,20 +65,6 @@ const NavBar = () => {
         theme == "dark" ? "text-white" : "text-black"
       }`}
     >
-      {
-        <div className="flex sm:hidden">
-          <button
-            onClick={toggleTheme}
-            className="p-2 bg-gray-200 dark:bg-gray-800 rounded-full"
-          >
-            {theme == "light" ? (
-              <FaMoon className="text-gray-800 dark:text-yellow-500 text-xl" />
-            ) : (
-              <FaSun className="text-yellow-500 dark:text-gray-200 text-xl" />
-            )}
-          </button>
-        </div>
-      }
       <NavLink onClick={toggleMenuDropdown} to="/">
         <span>Home</span>
       </NavLink>
@@ -102,10 +88,10 @@ const NavBar = () => {
     </ul>
   );
   const navElementsEnd = (
-    <div className="flex items-center justify-center sm:justify-left gap-1 sm:gap-5">
+    <div className="flex items-center justify-center sm:justify-left gap-2 mb-2 md:mb-0 sm:gap-5">
       {user && (
         <div
-          className={`hidden sm:flex dropdown dropdown-end ${
+          className={` dropdown dropdown-end ${
             theme == "dark" ? "text-white" : "text-black"
           }`}
         >
@@ -169,7 +155,7 @@ const NavBar = () => {
           </Link>
         )}
       </div>
-      <div className="hidden sm:flex">
+      <div className="">
         <button
           onClick={toggleTheme}
           className="p-2 bg-white shadow-lg rounded-full"
@@ -248,7 +234,7 @@ const NavBar = () => {
       </div>
       <div className="navbar-center hidden lg:flex">{navElements}</div>
       <div className="navbar-end gap-2">
-        {user && (
+        {/* {user && (
           <div
             tabIndex={0}
             role="button"
@@ -262,13 +248,15 @@ const NavBar = () => {
               />
             </div>
           </div>
-        )}
+        )} */}
         <div className="hidden sm:flex">{navElementsEnd}</div>
         <div className="dropdown dropdown-left">
           <div
             tabIndex={0}
             role="button"
-            className={`btn btn-ghost lg:hidden text-black`}
+            className={`btn btn-ghost lg:hidden ${
+              theme == "dark" ? "text-white" : "text-black"
+            }`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
