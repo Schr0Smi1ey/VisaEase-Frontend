@@ -69,7 +69,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/Visa/${params.id}`),
+          fetch(`https://visaease.vercel.app/Visa/${params.id}`),
       },
     ],
   },

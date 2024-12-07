@@ -39,7 +39,7 @@ const MyAddedVisas = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/Visa`)
+    fetch(`https://visaease.vercel.app/Visa`)
       .then((response) => response.json())
       .then((data) => {
         const userVisas = data.filter((visa) => visa.addedBy === user.email);
@@ -105,7 +105,7 @@ const MyAddedVisas = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const updatedVisa = { ...visaData };
-    fetch(`http://localhost:5000/Visa/${selectedVisa._id}`, {
+    fetch(`https://visaease.vercel.app/Visa/${selectedVisa._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedVisa),
@@ -147,7 +147,9 @@ const MyAddedVisas = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/Visa/${visaId}`, { method: "DELETE" })
+        fetch(`https://visaease.vercel.app/Visa/${visaId}`, {
+          method: "DELETE",
+        })
           .then(() => {
             setVisas(visas.filter((visa) => visa._id !== visaId));
           })

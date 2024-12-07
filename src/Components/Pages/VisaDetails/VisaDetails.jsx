@@ -44,7 +44,7 @@ const VisaDetails = () => {
       visaId: _id,
       ...visaWithoutId,
     };
-    fetch("http://localhost:5000/Applications", {
+    fetch("https://visaease.vercel.app/Applications", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(applicationData),

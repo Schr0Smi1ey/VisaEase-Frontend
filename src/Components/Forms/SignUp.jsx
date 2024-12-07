@@ -47,7 +47,7 @@ const SignUp = () => {
     creationTime,
     lastSignInTime
   ) => {
-    fetch("http://localhost:5000/Users", {
+    fetch("https://visaease.vercel.app/Users", {
       method: "POST",
       headers: {
         "content-type": "application/json",

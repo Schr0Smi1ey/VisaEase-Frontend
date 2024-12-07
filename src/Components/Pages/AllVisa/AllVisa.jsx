@@ -11,7 +11,7 @@ const AllVisa = () => {
   const { theme, Toast } = useContext(AuthContext);
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetch("http://localhost:5000/Visa")
+    fetch("https://visaease.vercel.app/Visa")
       .then((response) => response.json())
       .then((data) => {
         setVisas(data);

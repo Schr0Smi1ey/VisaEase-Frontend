@@ -21,7 +21,7 @@ const MyVisaApplications = () => {
     Aos.init({ duration: 500 });
   }, []);
   useEffect(() => {
-    fetch(`http://localhost:5000/Applications`)
+    fetch(`https://visaease.vercel.app/Applications`)
       .then((response) => response.json())
       .then((data) => {
         const userApplications = data.filter(
@@ -43,7 +43,7 @@ const MyVisaApplications = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/Applications/${applicationId}`, {
+        fetch(`https://visaease.vercel.app/Applications/${applicationId}`, {
           method: "DELETE",
         })
           .then((result) => {
