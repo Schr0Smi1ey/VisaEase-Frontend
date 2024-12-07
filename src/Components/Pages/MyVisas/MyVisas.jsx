@@ -331,16 +331,16 @@ const MyAddedVisas = () => {
               </div>
               <div className="flex gap-3 mt-4">
                 <button
-                  onClick={() => handleUpdate(visa)}
-                  className="px-4 py-1 bg-sky-500 text-white rounded-md"
-                >
-                  Update
-                </button>
-                <button
                   onClick={() => handleDelete(visa._id)}
                   className="px-4 py-1 rounded-md bg-red-500 text-white font-medium"
                 >
                   Delete
+                </button>
+                <button
+                  onClick={() => handleUpdate(visa)}
+                  className="px-4 py-1 bg-sky-500 text-white rounded-md"
+                >
+                  Update
                 </button>
               </div>
             </div>
@@ -349,8 +349,12 @@ const MyAddedVisas = () => {
       )}
       {/* Update Visa Modal */}
       {isModalOpen && selectedVisa && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 mt-8">
-          <div className="modal-box w-full max-w-lg bg-white rounded-lg shadow-lg p-6">
+        <div
+          className={`fixed inset-0 flex items-center justify-center ${
+            theme == "dark" ? "text-white" : "text-black"
+          }z-50 mt-8`}
+        >
+          <div className="modal-box w-full max-w-lg  rounded-lg shadow-lg p-6">
             <h2 className="text-2xl font-bold text-primary mb-4">
               Update {selectedVisa.countryName} Visa
             </h2>
@@ -516,15 +520,18 @@ const MyAddedVisas = () => {
                   className="input input-bordered w-full"
                 />
               </div>
-              <div className="modal-action flex justify-end">
+              <div className="modal-action flex gap-2 justify-end">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="btn btn-secondary"
+                  className="px-4 py-2 bg-red-500 text-white text-lg font-semibold rounded-lg"
                 >
                   Cancel
                 </button>
-                <button type="submit" className="btn btn-primary ml-2">
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-green-500 text-white text-lg font-semibold rounded-lg"
+                >
                   Update
                 </button>
               </div>

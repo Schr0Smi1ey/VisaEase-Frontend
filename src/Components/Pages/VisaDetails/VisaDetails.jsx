@@ -15,7 +15,7 @@ import "sweetalert2/src/sweetalert2.scss";
 
 const VisaDetails = () => {
   const visaData = useLoaderData();
-  const { user, Toast } = useContext(AuthContext);
+  const { user, Toast, theme } = useContext(AuthContext);
   const [visa, setVisa] = useState(visaData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -77,57 +77,92 @@ const VisaDetails = () => {
   };
 
   return (
-    <div className="container mx-auto max-w-3xl px-4 py-8">
+    <div
+      className={`container mx-auto max-w-3xl px-4 py-8 ${
+        theme == "dark" ? "text-white" : "text-black"
+      }`}
+    >
       <Helmet>
         <title>VisaEase | Visa-Details | {visa._id}</title>
       </Helmet>
       <h1 className="text-3xl text-center font-bold mb-6 text-primary">
         {visa.countryName} Visa Details
       </h1>
-      <div className="bg-white shadow rounded-lg p-6">
+      <div
+        className={`shadow ${
+          theme == "dark" ? "bg-gray-950" : "bg-white"
+        } rounded-lg p-6`}
+      >
         <img
           src={visa.countryImage}
           alt={`${visa.countryName}`}
           className="rounded-lg w-[60%] mx-auto object-cover mb-4 border-2 border-gray-100"
         />
         <div className="max-w-2xl mx-auto w-fit space-y-2">
-          <p className="flex items-center gap-4 text-gray-700">
+          <p
+            className={`flex items-center gap-4 ${
+              theme == "dark" ? "text-white" : "text-gray-700"
+            }`}
+          >
             <FiType className="text-green-500 text-xl" />
-            <strong className="text-gray-900">Visa Type:</strong>{" "}
-            {visa.visaType}
+            <strong>Visa Type:</strong> {visa.visaType}
           </p>
-          <p className="flex items-center gap-4 text-gray-700">
+          <p
+            className={`flex items-center gap-4 ${
+              theme == "dark" ? "text-white" : "text-gray-700"
+            }`}
+          >
             <BiTimeFive className="text-blue-500 text-xl" />
-            <strong className="text-gray-900">Processing Time:</strong>{" "}
-            {visa.processingTime}
+            <strong>Processing Time:</strong> {visa.processingTime}
           </p>
-          <p className="flex items-center gap-4 text-gray-700">
+          <p
+            className={`flex items-center gap-4 ${
+              theme == "dark" ? "text-white" : "text-gray-700"
+            }`}
+          >
             <AiOutlineFileText className="text-indigo-500 text-xl" />
-            <strong className="text-gray-900">Required Documents:</strong>{" "}
+            <strong>Required Documents:</strong>{" "}
             {visa.requiredDocuments.join(", ")}
           </p>
-          <p className="flex items-center gap-4 text-gray-700">
+          <p
+            className={`flex items-center gap-4 ${
+              theme == "dark" ? "text-white" : "text-gray-700"
+            }`}
+          >
             <MdDescription className="text-yellow-500 text-xl" />
-            <strong className="text-gray-900">Description:</strong>{" "}
-            {visa.description}
+            <strong>Description:</strong> {visa.description}
           </p>
-          <p className="flex items-center gap-4 text-gray-700">
+          <p
+            className={`flex items-center gap-4 ${
+              theme == "dark" ? "text-white" : "text-gray-700"
+            }`}
+          >
             <FaBirthdayCake className="text-pink-500 text-xl" />
-            <strong className="text-gray-900">Age Restriction:</strong>{" "}
-            {visa.ageRestriction} years
+            <strong>Age Restriction:</strong> {visa.ageRestriction} years
           </p>
-          <p className="flex items-center gap-4 text-gray-700">
+          <p
+            className={`flex items-center gap-4 ${
+              theme == "dark" ? "text-white" : "text-gray-700"
+            }`}
+          >
             <RiMoneyDollarCircleLine className="text-green-600 text-xl" />
-            <strong className="text-gray-900">Fee:</strong> ${visa.fee}
+            <strong>Fee:</strong> ${visa.fee}
           </p>
-          <p className="flex items-center gap-4 text-gray-700">
+          <p
+            className={`flex items-center gap-4 ${
+              theme == "dark" ? "text-white" : "text-gray-700"
+            }`}
+          >
             <BsCalendarCheck className="text-purple-500 text-xl" />
-            <strong className="text-gray-900">Validity:</strong> {visa.validity}
+            <strong>Validity:</strong> {visa.validity}
           </p>
-          <p className="flex items-center gap-4 text-gray-700">
+          <p
+            className={`flex items-center gap-4 ${
+              theme == "dark" ? "text-white" : "text-gray-700"
+            }`}
+          >
             <HiOutlineMail className="text-teal-500 text-xl" />
-            <strong className="text-gray-900">Application Method:</strong>{" "}
-            {visa.applicationMethod}
+            <strong>Application Method:</strong> {visa.applicationMethod}
           </p>
         </div>
         <button
@@ -140,8 +175,12 @@ const VisaDetails = () => {
 
       {/* Application Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="modal-box w-full max-w-lg bg-white rounded-lg shadow-lg p-6">
+        <div
+          className={`fixed inset-0 flex items-center justify-center ${
+            theme == "dark" ? "text-white" : "text-black"
+          } z-50`}
+        >
+          <div className="modal-box w-full max-w-lg  rounded-lg shadow-lg p-6">
             <h2 className="text-2xl font-bold text-primary mb-4">
               Apply for {visa.countryName} Visa
             </h2>
