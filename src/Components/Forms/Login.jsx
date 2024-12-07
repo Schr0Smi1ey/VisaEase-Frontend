@@ -15,23 +15,19 @@ const Login = () => {
   const location = useLocation();
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
+  const attemptedPath = location.state?.from || "/";
+  const handlePasswordVisibility = () => setShowPassword(!showPassword);
   useEffect(() => {
     window.scrollTo(0, 0);
     AOS.init({ duration: 500 });
   }, []);
-
-  const attemptedPath = location.state?.from || "/";
-  const handlePasswordVisibility = () => setShowPassword(!showPassword);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const password = e.target[1].value;
-    console.log(email, password);
     signInUser(email, password)
       .then(() => {
         setTimeout(() => {
-          // navigate(attemptedPath);
+          navigate(attemptedPath);
           Toast("Login Successful", "success");
         }, 200);
       })
@@ -65,7 +61,6 @@ const Login = () => {
         <title>VisaEase | Login</title>
       </Helmet>
       <div className="flex w-full max-w-5xl shadow-lg bg-white rounded-lg overflow-hidden">
-        {/* Left Panel */}
         <div
           className="hidden md:flex md:w-1/2 bg-primary text-white flex-col items-center justify-center p-8"
           data-aos="fade-right"
@@ -78,7 +73,6 @@ const Login = () => {
           </p>
         </div>
 
-        {/* Right Panel */}
         <div
           className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center"
           data-aos="fade-left"
@@ -87,7 +81,6 @@ const Login = () => {
             Login
           </h2>
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email */}
             <div>
               <label
                 htmlFor="email"
@@ -106,7 +99,6 @@ const Login = () => {
               />
             </div>
 
-            {/* Password */}
             <div>
               <label
                 htmlFor="password"
@@ -146,7 +138,6 @@ const Login = () => {
               </Link>
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               className="w-full py-2 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition"
@@ -155,13 +146,11 @@ const Login = () => {
             </button>
           </form>
 
-          {/* OR Separator */}
           <div className="relative my-6 text-center">
             <span className="bg-white px-2 text-sm text-gray-500">OR</span>
             <div className="absolute inset-0 border-t border-gray-300"></div>
           </div>
 
-          {/* Google Sign-In */}
           <button
             onClick={handleSignInWithGoogle}
             className="w-full py-2 flex items-center justify-center border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-100 transition"
@@ -191,7 +180,6 @@ const Login = () => {
             Sign in with Google
           </button>
 
-          {/* Signup Link */}
           <p className="mt-6 text-center text-sm">
             New to VisaEase?{" "}
             <Link

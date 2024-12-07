@@ -5,7 +5,7 @@ import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 const LatestVisas = () => {
   const [visas, setVisas] = useState([]);
   const navigate = useNavigate();
-  const { theme } = useContext(AuthContext);
+  const { theme, Toast } = useContext(AuthContext);
   useEffect(() => {
     fetch("http://localhost:5000/Visa")
       .then((res) => res.json())
@@ -13,7 +13,7 @@ const LatestVisas = () => {
         const latestVisas = [...data].reverse().slice(0, 6);
         setVisas(latestVisas);
       })
-      .catch((err) => console.error("Error fetching visas:", err));
+      .catch((err) => Toast(err.message, "error"));
   }, []);
 
   return (

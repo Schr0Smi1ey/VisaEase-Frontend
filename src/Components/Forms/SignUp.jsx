@@ -13,7 +13,6 @@ const SignUp = () => {
   const navigate = useNavigate();
   const { createUser, Toast, updateUserProfile, signInWithGoogle, setLoading } =
     useContext(AuthContext);
-
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
   const [formData, setFormData] = useState({
@@ -22,9 +21,11 @@ const SignUp = () => {
     photoURL: "",
     password: "",
   });
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    AOS.init({ duration: 500 });
+  }, []);
   const handlePasswordVisibility = () => setShowPassword(!showPassword);
-
   const validatePassword = (password) => {
     const errors = [];
     if (!/[A-Z]/.test(password)) errors.push("one uppercase letter");
@@ -34,7 +35,6 @@ const SignUp = () => {
       errors.length ? `Password must include ${errors.join(", ")}.` : ""
     );
   };
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -47,7 +47,6 @@ const SignUp = () => {
     creationTime,
     lastSignInTime
   ) => {
-    console.log(email, name, photoURL, creationTime, lastSignInTime);
     fetch("http://localhost:5000/Users", {
       method: "POST",
       headers: {
@@ -60,20 +59,15 @@ const SignUp = () => {
         creationTime,
         lastSignInTime,
       }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (passwordError) return;
-
     const { email, password, name, photoURL } = formData;
     const navigationPath = location.state?.from || "/";
-    console.log(email, password, name, photoURL);
     createUser(email, password)
       .then((res) => {
-        console.log(res);
         updateUserProfile(name, photoURL);
         sendToDatabase(
           email,
@@ -84,7 +78,6 @@ const SignUp = () => {
         );
       })
       .then(() => {
-        console.log("Account Created Successfully");
         Toast("Account Created Successfully", "success");
         navigate(navigationPath, { replace: true });
       })
@@ -94,7 +87,6 @@ const SignUp = () => {
         setFormData({ name: "", email: "", photoURL: "", password: "" });
       });
   };
-
   const handleSignInWithGoogle = () => {
     signInWithGoogle()
       .then((res) => {
@@ -112,18 +104,12 @@ const SignUp = () => {
       .finally(() => setLoading(false));
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    AOS.init({ duration: 500 });
-  }, []);
-
   return (
     <div className="min-h-screen bg-gradient-to-t from-primary/20 to-primary/10 flex items-center justify-center">
       <Helmet>
         <title>VisaEase | Sign Up</title>
       </Helmet>
       <div className="flex bg-white rounded-lg shadow-xl w-full max-w-5xl overflow-hidden">
-        {/* Left Side */}
         <div
           data-aos="fade-right"
           className="hidden md:flex w-1/2 bg-gradient-to-r from-primary to-primary/70 text-white flex-col items-center justify-center p-8"
@@ -136,7 +122,6 @@ const SignUp = () => {
           </p>
         </div>
 
-        {/* Right Side */}
         <div
           data-aos="fade-left"
           className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center"

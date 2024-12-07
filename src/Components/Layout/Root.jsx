@@ -12,7 +12,7 @@ const Root = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <ScaleLoader color="#FF6363" height={100} width={10} radius={5} />
+        <ScaleLoader color="#387478" height={100} width={10} radius={5} />
       </div>
     );
   }

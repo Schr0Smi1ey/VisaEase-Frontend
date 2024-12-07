@@ -6,15 +6,7 @@ import slide2 from "../../../../Assets/Slide2.jpg";
 import slide3 from "../../../../Assets/Slide3.jpg";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import {
-  Bounce,
-  Fade,
-  Flip,
-  Hinge,
-  JackInTheBox,
-  Roll,
-  Slide,
-} from "react-awesome-reveal";
+import { Slide } from "react-awesome-reveal";
 import { Typewriter } from "react-simple-typewriter";
 
 const Banner = () => {
@@ -101,7 +93,7 @@ const Banner = () => {
                         cursorStyle=""
                         typeSpeed={70}
                         deleteSpeed={50}
-                        delaySpeed={1000}
+                        delaySpeed={800}
                       />
                     </h1>
                   </Slide>
@@ -123,7 +115,7 @@ const Banner = () => {
                         : "/all-visas"
                     )
                   }
-                  className="btn bg-primary/90 hover:bg-white hover:text-black hover:border-2 hover:border-green-500 font-semibold text-lg text-white"
+                  className="btn bg-primary/90 hover:bg-white hover:text-black hover:border-2 hover:border-primary font-semibold text-lg text-white"
                   data-aos="fade-up"
                   data-aos-delay="400"
                   data-aos-duration="1000"

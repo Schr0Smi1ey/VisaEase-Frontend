@@ -22,6 +22,10 @@ const AddVisa = () => {
     addedBy: "",
   });
   const { user, theme } = useContext(AuthContext);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    Aos.init({ duration: 500 });
+  }, []);
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
 
@@ -36,11 +40,9 @@ const AddVisa = () => {
       setVisaData({ ...visaData, [name]: value });
     }
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     visaData.addedBy = user.email;
-    console.log(visaData);
     fetch("http://localhost:5000/Visa", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -79,10 +81,7 @@ const AddVisa = () => {
         });
       });
   };
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    Aos.init({ duration: 500 });
-  }, []);
+
   return (
     <div
       className={`container ${
@@ -316,7 +315,7 @@ const AddVisa = () => {
         <button
           data-aos="fade-up"
           type="submit"
-          className="btn bg-primary/[130] text-xl w-full mt-4 text-white font-bold"
+          className="py-2 rounded-lg bg-primary/[130] text-xl w-full mt-4 text-white font-bold"
         >
           Add Visa
         </button>

@@ -18,7 +18,6 @@ const Footer = () => {
   return (
     <div className={`py-10 ${theme == "dark" ? "text-white" : ""}`}>
       <div className="container mx-auto">
-        {/* Branding */}
         <div data-aos="fade-down" className="text-center">
           <h3 className="flex justify-center items-center gap-3 font-bold text-3xl mb-3">
             Visa<span className="text-primary">Ease</span>
@@ -29,12 +28,9 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Divider */}
         <div data-aos="fade-down" className="divider my-5"></div>
 
-        {/* Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-          {/* Column 1: Navigation */}
           <div
             data-aos="fade-up"
             className="flex mx-auto items-center md:items-start flex-col gap-2"
@@ -63,7 +59,6 @@ const Footer = () => {
             </Link>
           </div>
 
-          {/* Column 2: Company */}
           <div
             data-aos="fade-up"
             className="flex flex-col mx-auto items-center md:items-start gap-2"
@@ -95,7 +90,6 @@ const Footer = () => {
             </Link>
           </div>
 
-          {/* Column 3: Resources */}
           <div
             data-aos="fade-up"
             className="flex flex-col mx-auto items-center md:items-start gap-2"
@@ -121,7 +115,6 @@ const Footer = () => {
             </Link>
           </div>
 
-          {/* Column 4: Follow Us */}
           <div
             data-aos="fade-up"
             className="flex flex-col mx-auto items-center md:items-start gap-2"
@@ -164,7 +157,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Footer Bottom */}
         <p className="text-center mt-10">
           &copy; {new Date().getFullYear()} VisaEase. All Rights Reserved.
         </p>

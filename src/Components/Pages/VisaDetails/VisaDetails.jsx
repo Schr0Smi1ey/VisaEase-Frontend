@@ -27,15 +27,15 @@ const VisaDetails = () => {
     appliedDate: new Date().toISOString().split("T")[0],
     fee: visaData.fee || "",
   });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
   useEffect(() => {
     window.scrollTo(0, 0);
     Aos.init({ duration: 500 });
   }, []);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
   const handleApply = async (e) => {
     e.preventDefault();
     const { _id, ...visaWithoutId } = visa;
@@ -50,7 +50,6 @@ const VisaDetails = () => {
       body: JSON.stringify(applicationData),
     })
       .then((res) => {
-        console.log(res);
         if (res.ok) {
           Swal.fire({
             position: "center",
@@ -70,7 +69,13 @@ const VisaDetails = () => {
               timer: 1500,
             });
           } else {
-            Toast("Failed to submit application", "error");
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Failed to submit application",
+              showConfirmButton: false,
+              timer: 1500,
+            });
           }
         }
       })
@@ -189,7 +194,6 @@ const VisaDetails = () => {
         </button>
       </div>
 
-      {/* Application Modal */}
       {isModalOpen && (
         <div
           className={`fixed inset-0 flex items-center justify-center ${

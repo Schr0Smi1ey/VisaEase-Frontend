@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
@@ -14,7 +15,7 @@ const ErrorPage = () => {
         </p>
         <Link
           to={"/"}
-          className="mt-6 inline-block px-6 py-2 bg-green-500 text-white text-lg rounded-md hover:bg-green-600"
+          className="mt-6 inline-block px-6 py-2 bg-primary text-white text-lg rounded-md hover:bg-primary/[130]"
         >
           Go Back to Home
         </Link>

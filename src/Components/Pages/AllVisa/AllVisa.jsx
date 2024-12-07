@@ -2,12 +2,13 @@ import { useState, useEffect, useContext } from "react";
 import VisaCard from "../../Cards/VisaCard";
 import { Helmet } from "react-helmet";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
+import { toast } from "react-toastify";
 
 const AllVisa = () => {
   const [visas, setVisas] = useState([]);
   const [filteredVisas, setFilteredVisas] = useState([]);
   const [filter, setFilter] = useState("All");
-  const { theme } = useContext(AuthContext);
+  const { theme, Toast } = useContext(AuthContext);
   useEffect(() => {
     window.scrollTo(0, 0);
     fetch("http://localhost:5000/Visa")
@@ -16,10 +17,9 @@ const AllVisa = () => {
         setVisas(data);
         setFilteredVisas(data);
       })
-      .catch((error) => console.error("Error fetching visas:", error));
+      .catch((error) => Toast(error.message, "error"));
   }, []);
 
-  // Handle filter change
   const handleFilterChange = (e) => {
     const selectedFilter = e.target.value;
     setFilter(selectedFilter);
@@ -47,7 +47,6 @@ const AllVisa = () => {
         All Visas
       </h1>
 
-      {/* Filter Dropdown */}
       <div className="flex justify-center mb-8 w-fit mx-auto">
         <select
           value={filter}
@@ -68,7 +67,9 @@ const AllVisa = () => {
           ))}
         </div>
       ) : (
-        <p className="text-center text-gray-500">No visas available.</p>
+        <p className="text-5xl text-center font-bold text-red-500 mt-5">
+          No visas available.
+        </p>
       )}
     </div>
   );

@@ -4,8 +4,6 @@ import LatestVisa from "./LatestVisa/LatestVisa";
 import BestDestinations from "./BestDestinations/BestDestinations";
 import Airlines from "./Airlines/Airlines";
 import { Helmet } from "react-helmet";
-import Test from "./Test/Test";
-// import Test from "./Test/Test";
 
 const Home = () => {
   useEffect(() => {
@@ -17,7 +15,6 @@ const Home = () => {
       <Helmet>
         <title>VisaEase | Home</title>
       </Helmet>
-      {/* <Test></Test> */}
       <Banner></Banner>
       <LatestVisa></LatestVisa>
       <BestDestinations></BestDestinations>

@@ -16,39 +16,23 @@ import Aos from "aos";
 const MyVisaApplications = () => {
   const { user, Toast, theme } = useContext(AuthContext);
   const [applications, setApplications] = useState([]);
-
-  // Fetch applications for the logged-in user
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    Aos.init({ duration: 500 });
+  }, []);
   useEffect(() => {
     fetch(`http://localhost:5000/Applications`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(user.email);
         const userApplications = data.filter(
           (application) => application.email === user.email
         );
         setApplications(userApplications);
       })
-      .catch((error) => console.error("Error fetching applications:", error));
+      .catch((error) => Toast(error.message, "error"));
   }, [user.email]);
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    Aos.init({ duration: 500 });
-  }, []);
-  // Handle Cancel Application
+
   const handleCancel = (applicationId) => {
-    // fetch(`http://localhost:5000/Applications/${applicationId}`, {
-    //   method: "DELETE",
-    // })
-    //   .then((result) => {
-    //     console.log(result);
-    //     Toast("Application cancelled successfully", "success");
-    //     setApplications(
-    //       applications.filter(
-    //         (application) => application._id !== applicationId
-    //       )
-    //     );
-    //   })
-    //   .catch((error) => Toast(error.message, "error"));
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",

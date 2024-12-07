@@ -38,24 +38,21 @@ const MyAddedVisas = () => {
     Aos.init({ duration: 500 });
   }, []);
 
-  // Fetch visas added by the logged-in user
   useEffect(() => {
     fetch(`http://localhost:5000/Visa`)
       .then((response) => response.json())
       .then((data) => {
         const userVisas = data.filter((visa) => visa.addedBy === user.email);
         setVisas(userVisas);
-        setFilteredVisas(userVisas); // Initialize filteredVisas
+        setFilteredVisas(userVisas);
       })
-      .catch((error) => console.error("Error fetching visas:", error));
+      .catch((error) => Toast(error.message, "error"));
   }, [user, visas]);
 
-  // Handle search input change
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  // Filter visas based on the search term
   const handleSearch = () => {
     const searchQuery = searchTerm.toLowerCase();
     const results = visas.filter((visa) =>
@@ -64,7 +61,6 @@ const MyAddedVisas = () => {
     setFilteredVisas(results);
   };
 
-  // Reset search and show all visas
   const resetSearch = () => {
     setSearchTerm("");
     setFilteredVisas(visas);
@@ -89,10 +85,8 @@ const MyAddedVisas = () => {
     }
   };
 
-  // Handle visa update
   const handleUpdate = (visa) => {
     setSelectedVisa(visa);
-    // Initialize visaData with selectedVisa data for form population
     setVisaData({
       countryImage: visa.countryImage,
       countryName: visa.countryName,
@@ -108,8 +102,40 @@ const MyAddedVisas = () => {
     });
     setIsModalOpen(true);
   };
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const updatedVisa = { ...visaData };
+    fetch(`http://localhost:5000/Visa/${selectedVisa._id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedVisa),
+    })
+      .then(() => {
+        setVisas(
+          visas.map((visa) =>
+            visa._id === selectedVisa._id ? updatedVisa : visa
+          )
+        );
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Application updated successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setIsModalOpen(false);
+      })
+      .catch((error) =>
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: `${error.message}`,
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      );
+  };
 
-  // Handle visa delete
   const handleDelete = (visaId) => {
     Swal.fire({
       title: "Are you sure?",
@@ -135,107 +161,12 @@ const MyAddedVisas = () => {
     });
   };
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    const updatedVisa = { ...visaData };
-    fetch(`http://localhost:5000/Visa/${selectedVisa._id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updatedVisa),
-    })
-      .then((result) => {
-        setVisas(
-          visas.map((visa) =>
-            visa._id === selectedVisa._id ? updatedVisa : visa
-          )
-        );
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Application updated successfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        setIsModalOpen(false);
-      })
-      .catch((error) =>
-        Swal.fire({
-          position: "center",
-          icon: "error",
-          title: "Failed to update visa",
-          showConfirmButton: false,
-          timer: 1500,
-        })
-      );
-  };
-
   return (
     <div
       className={`container ${
         theme == "dark" ? "text-white" : "text-black"
       } mx-auto px-4`}
     >
-      {/* <h1 className="text-3xl text-center font-bold mb-6 text-primary">
-        My Added Visas
-      </h1>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {visas.map((visa) => (
-          <div
-            key={visa._id}
-            className="bg-white rounded-lg shadow-lg border-2 border-red-600 p-2 md:p-3 lg:p-4"
-          >
-            <img
-              src={visa.countryImage}
-              alt={visa.countryName}
-              className="border-2 border-gray-100 mx-auto object-cover rounded-lg mb-4"
-            />
-            <h3 className="font-bold text-xl mb-2">{visa.countryName}</h3>
-            <p className={`flex flex-wrap items-center gap-2 ${theme == "dark" ? "text-white" : "text-gray-700"}`}>
-              <FiType className="text-green-500 text-xl" />
-              <strong >Visa Type:</strong>{" "}
-              {visa.visaType}
-            </p>
-            <p className="flex flex-wrap items-center gap-2 text-gray-700 border-2 border-red-500">
-              <BiTimeFive className="text-blue-500 text-xl" />
-              <strong className="text-gray-900 inline-block">
-                Processing Time:
-              </strong>{" "}
-              {visa.processingTime}
-            </p>
-            <p className={`flex flex-wrap items-center gap-2 ${theme == "dark" ? "text-white" : "text-gray-700"}`}>
-              <RiMoneyDollarCircleLine className="text-green-600 text-xl" />
-              <strong >Fee:</strong> ${visa.fee}
-            </p>
-            <p className={`flex flex-wrap items-center gap-2 ${theme == "dark" ? "text-white" : "text-gray-700"}`}>
-              <BsCalendarCheck className="text-purple-500 text-xl" />
-              <strong >Validity:</strong>{" "}
-              {visa.validity}
-            </p>
-            <p className={`flex flex-wrap items-center gap-2 ${theme == "dark" ? "text-white" : "text-gray-700"}`}>
-              <FaClipboardList className="text-teal-500 text-xl" />
-              <strong >
-                Application Method:
-              </strong>{" "}
-              {visa.applicationMethod}
-            </p>
-            <div className="flex gap-3 mt-4">
-              <button
-                onClick={() => handleUpdate(visa)}
-                className="px-4 py-1 bg-sky-500 text-white rounded-md"
-              >
-                Update
-              </button>
-              <button
-                onClick={() => handleDelete(visa._id)}
-                className="px-4 py-1 rounded-md bg-gray-200"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
-      </div> */}
       <Helmet>
         <title>VisaEase | My-Visa </title>
       </Helmet>
@@ -245,7 +176,6 @@ const MyAddedVisas = () => {
       >
         My Added Visas
       </h1>
-      {/* Search Bar */}
       <div className="flex flex-col md:flex-row items-center gap-2 mb-6">
         <input
           data-aos="fade-right"
@@ -270,7 +200,6 @@ const MyAddedVisas = () => {
           </button>
         </div>
       </div>
-      {/* Visa Cards */}
       {visas.length === 0 ? (
         <p className="text-5xl text-center font-bold text-red-500 mt-5">
           You have not added any visas yet.
@@ -357,7 +286,6 @@ const MyAddedVisas = () => {
           ))}
         </div>
       )}
-      {/* Update Visa Modal */}
       {isModalOpen && selectedVisa && (
         <div
           className={`fixed inset-0 flex items-center justify-center ${
@@ -369,7 +297,6 @@ const MyAddedVisas = () => {
               Update {selectedVisa.countryName} Visa
             </h2>
             <form onSubmit={handleFormSubmit}>
-              {/* Image */}
               <div className="mb-4">
                 <label className="block font-medium">Country Image URL</label>
                 <input
@@ -380,7 +307,6 @@ const MyAddedVisas = () => {
                   className="input input-bordered w-full"
                 />
               </div>
-              {/* Country */}
               <div className="mb-4">
                 <label className="block font-medium">Country</label>
                 <input
@@ -391,7 +317,6 @@ const MyAddedVisas = () => {
                   className="input input-bordered w-full"
                 />
               </div>
-              {/* Visa Type */}
               <div className="mb-4">
                 <label
                   className="block text-lg font-semibold mb-2"
@@ -415,7 +340,6 @@ const MyAddedVisas = () => {
                   <option value="Official visa">Official Visa</option>
                 </select>
               </div>
-              {/* Processing Time */}
               <div className="mb-4">
                 <label className="block font-medium">Processing Time</label>
                 <input
@@ -426,13 +350,11 @@ const MyAddedVisas = () => {
                   className="input input-bordered w-full"
                 />
               </div>
-              {/* Required Documents */}
               <div className="mb-4">
                 <label className="block text-lg font-semibold mb-2">
                   Required Documents
                 </label>
                 <div className="flex flex-wrap gap-2">
-                  {/* Checkbox for Valid Passport */}
                   <label className="flex flex-wrap items-center gap-2">
                     <input
                       type="checkbox"
@@ -446,7 +368,6 @@ const MyAddedVisas = () => {
                     />
                     Valid Passport
                   </label>
-                  {/* Checkbox for Visa Application Form */}
                   <label className="flex flex-wrap items-center gap-2">
                     <input
                       type="checkbox"
@@ -460,7 +381,6 @@ const MyAddedVisas = () => {
                     />
                     Visa Application Form
                   </label>
-                  {/* Checkbox for Recent Passport-Sized Photograph */}
                   <label className="flex flex-wrap items-center gap-2">
                     <input
                       type="checkbox"
@@ -476,7 +396,6 @@ const MyAddedVisas = () => {
                   </label>
                 </div>
               </div>
-              {/* Description */}
               <div className="mb-4">
                 <label className="block font-medium">Description</label>
                 <textarea
@@ -486,7 +405,6 @@ const MyAddedVisas = () => {
                   className="textarea textarea-bordered w-full"
                 ></textarea>
               </div>
-              {/* Age Restriction */}
               <div className="mb-4">
                 <label className="block font-medium">Age Restriction</label>
                 <input
@@ -497,7 +415,6 @@ const MyAddedVisas = () => {
                   className="input input-bordered w-full"
                 />
               </div>
-              {/* Fee */}
               <div className="mb-4">
                 <label className="block font-medium">Fee</label>
                 <input
@@ -508,7 +425,6 @@ const MyAddedVisas = () => {
                   className="input input-bordered w-full"
                 />
               </div>
-              {/* Validity */}
               <div className="mb-4">
                 <label className="block font-medium">Validity</label>
                 <input
@@ -519,7 +435,6 @@ const MyAddedVisas = () => {
                   className="input input-bordered w-full"
                 />
               </div>
-              {/* Application Method */}
               <div className="mb-4">
                 <label className="block font-medium">Application Method</label>
                 <input

@@ -1,15 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  useParams,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./Components/Layout/Root.jsx";
 import AuthProvider from "./Contexts/AuthContext/AuthProvider.jsx";
 import Home from "./Components/Pages/Home/Home.jsx";
-import Login from "./Components/Forms/LogIn.jsx";
 import SignUp from "./Components/Forms/SignUp.jsx";
 import AllVisa from "./Components/Pages/AllVisa/AllVisa.jsx";
 import AddVisa from "./Components/Forms/addVisa.jsx";
@@ -17,10 +12,13 @@ import MyVisas from "./Components/Pages/MyVisas/MyVisas.jsx";
 import MyApplication from "./Components/Pages/MyApplications/MyApplications.jsx";
 import PrivateRoute from "./PrivateRoute/PrivateRoute.jsx";
 import VisaDetails from "./Components/Pages/VisaDetails/VisaDetails.jsx";
+import ErrorPage from "./Components/Shared/Errorpage/Errorpage.jsx";
+import Login from "./Components/Forms/Login.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    errorElement: <ErrorPage></ErrorPage>,
     element: <Root></Root>,
     children: [
       {

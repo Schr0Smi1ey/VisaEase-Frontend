@@ -12,25 +12,20 @@ const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scroll, setScroll] = useState(false);
   const navigate = useNavigate();
-  //   const handleScroll = () => {
-  //     if (window.scrollY > 50) {
-  //       setScroll(true);
-  //     } else {
-  //       setScroll(false);
-  //     }
-  //   };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScroll(true);
+      } else {
+        setScroll(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
-  // useEffect(() => {
-  //   document.documentElement.setAttribute("data-theme", theme);
-  //   localStorage.setItem("theme", theme);
-  // }, [theme]);
-
-  // const toggleTheme = () => {
-  //   setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-  // };
   const toggleMenuDropdown = () => {
     setIsMenuOpen(!isMenuOpen);
     setIsProfileOpen(false);

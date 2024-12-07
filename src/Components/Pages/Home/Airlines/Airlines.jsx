@@ -81,7 +81,6 @@ const Airlines = () => {
         theme == "dark" ? "text-white" : "text-black"
       }`}
     >
-      {/* Section Header */}
       <div data-aos="zoom-in">
         <h2 className="text-2xl md:text-3xl lg:text-5xl font-extrabold mb-4">
           Search Top Airlines
@@ -92,7 +91,6 @@ const Airlines = () => {
         </p>
       </div>
 
-      {/* Airline Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center gap-2 lg:gap-6">
         {airlines.map((airline) => (
           <div
