@@ -6,8 +6,8 @@ export default {
       colors: {
         primary: "#FF6363",
         theme: {
-          light: "#3b82f6", // Light theme primary color
-          dark: "#1e40af", // Dark theme primary color
+          light: "#ffffff", // Light theme primary color
+          dark: "#000000", // Dark theme primary color
         },
       },
     },

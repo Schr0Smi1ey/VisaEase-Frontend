@@ -4,6 +4,8 @@ import { BiTimeFive } from "react-icons/bi";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { BsCalendarCheck } from "react-icons/bs";
 import { FaClipboardList } from "react-icons/fa";
+import { useContext } from "react";
+import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 const VisaCard = ({ visa }) => {
   const {
     countryImage,
@@ -14,8 +16,13 @@ const VisaCard = ({ visa }) => {
     processingTime,
     applicationMethod,
   } = visa;
+  const { theme } = useContext(AuthContext);
   return (
-    <div className="card shadow-lg rounded-lg border border-gray-200">
+    <div
+      className={`card shadow-lg rounded-lg border border-gray-200 ${
+        theme == "dark" ? "text-white" : "text-black"
+      } ${theme == "dark" ? "bg-gray-950" : "bg-white"}`}
+    >
       <img
         src={countryImage}
         alt={`${countryName} Visa`}
@@ -26,23 +33,43 @@ const VisaCard = ({ visa }) => {
           {countryName}
         </h2>
         <div className="flex-grow mt-3">
-          <p className="flex items-center gap-2 text-gray-700">
+          <p
+            className={`flex items-center gap-2 text-gray-700 ${
+              theme == "dark" ? "text-white" : "text-black"
+            }`}
+          >
             <FiType className="text-green-500 text-xl" />
-            <strong className="text-gray-900">Visa Type:</strong> {visaType}
+            <strong>Visa Type:</strong> {visaType}
           </p>
-          <p className="flex items-center gap-2 text-gray-700">
+          <p
+            className={`flex items-center gap-2 text-gray-700 ${
+              theme == "dark" ? "text-white" : "text-black"
+            }`}
+          >
             <BiTimeFive className="inline-block text-blue-500 text-xl" />
             <strong> Processing Time:</strong> {processingTime}
           </p>
-          <p className="flex items-center gap-2 text-gray-700">
+          <p
+            className={`flex items-center gap-2 text-gray-700 ${
+              theme == "dark" ? "text-white" : "text-black"
+            }`}
+          >
             <RiMoneyDollarCircleLine className="inline-block text-green-600 text-xl" />
             <strong> Fee:</strong> ${fee}
           </p>
-          <p className="flex items-center gap-2 text-gray-700">
+          <p
+            className={`flex items-center gap-2 text-gray-700 ${
+              theme == "dark" ? "text-white" : "text-black"
+            }`}
+          >
             <BsCalendarCheck className="inline-block text-purple-500 text-xl" />
             <strong> Validity:</strong> {validity}
           </p>
-          <p className="flex flex-wrap items-center gap-2 text-gray-700">
+          <p
+            className={`flex items-center gap-2 text-gray-700 ${
+              theme == "dark" ? "text-white" : "text-black"
+            }`}
+          >
             <FaClipboardList className="inline-block text-teal-500 text-xl" />
             <strong> Application Method:</strong> {applicationMethod}
           </p>

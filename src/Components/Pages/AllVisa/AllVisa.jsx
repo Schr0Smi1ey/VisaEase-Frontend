@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import VisaCard from "../../Cards/VisaCard";
 import { Helmet } from "react-helmet";
+import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
 
 const AllVisa = () => {
   const [visas, setVisas] = useState([]);
   const [filteredVisas, setFilteredVisas] = useState([]);
   const [filter, setFilter] = useState("All");
-
+  const { theme } = useContext(AuthContext);
   useEffect(() => {
     window.scrollTo(0, 0);
     fetch("http://localhost:5000/Visa")
@@ -34,7 +35,11 @@ const AllVisa = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div
+      className={`container mx-auto px-4 py-8 ${
+        theme == "dark" ? "text-white" : "text-black"
+      }`}
+    >
       <Helmet>
         <title>VisaEase | All-Visa</title>
       </Helmet>

@@ -12,7 +12,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 
 const MyVisaApplications = () => {
-  const { user, Toast } = useContext(AuthContext);
+  const { user, Toast, theme } = useContext(AuthContext);
   const [applications, setApplications] = useState([]);
 
   // Fetch applications for the logged-in user
@@ -77,7 +77,11 @@ const MyVisaApplications = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div
+      className={`container mx-auto px-4 py-8 ${
+        theme == "dark" ? "text-white" : "text-black"
+      }`}
+    >
       <Helmet>
         <title>VisaEase | My-Applications</title>
       </Helmet>
@@ -93,7 +97,9 @@ const MyVisaApplications = () => {
           {applications.map((application) => (
             <div
               key={application._id}
-              className="bg-white p-2 rounded-lg shadow-lg text-lg"
+              className={`${
+                theme == "dark" ? "bg-gray-950" : "bg-white"
+              } p-2 rounded-lg shadow-lg text-lg`}
             >
               <img
                 src={application.countryImage}
@@ -103,39 +109,70 @@ const MyVisaApplications = () => {
               <h3 className="font-bold text-xl mb-2">
                 {application.countryName}
               </h3>
-              <p className="flex flex-wrap items-center gap-2 text-gray-700">
+              <p
+                className={`flex flex-wrap items-center gap-2 ${
+                  theme == "dark" ? "text-white" : "text-gray-700"
+                }`}
+              >
                 <FiType className="text-green-500 text-xl" />
-                <strong className="text-gray-900">Visa Type:</strong>{" "}
-                {application.visaType}
+                <strong>Visa Type:</strong> {application.visaType}
               </p>
-              <p className="flex flex-wrap items-center gap-2 text-gray-700">
+              <p
+                className={`flex flex-wrap items-center gap-2 ${
+                  theme == "dark" ? "text-white" : "text-gray-700"
+                }`}
+              >
                 <BiTimeFive className="inline-block text-blue-500 text-xl" />
                 <strong> Processing Time:</strong> {application.processingTime}
               </p>
-              <p className="flex flex-wrap items-center gap-2 text-gray-700">
+              <p
+                className={`flex flex-wrap items-center gap-2 ${
+                  theme == "dark" ? "text-white" : "text-gray-700"
+                }`}
+              >
                 <RiMoneyDollarCircleLine className="inline-block text-green-600 text-xl" />
                 <strong> Fee:</strong> ${application.fee}
               </p>
-              <p className="flex flex-wrap items-center gap-2 text-gray-700">
+              <p
+                className={`flex flex-wrap items-center gap-2 ${
+                  theme == "dark" ? "text-white" : "text-gray-700"
+                }`}
+              >
                 <BsCalendarCheck className="inline-block text-purple-500 text-xl" />
                 <strong> Validity:</strong> {application.validity}
               </p>
-              <p className="flex flex-wrap items-center gap-2 text-gray-700">
+              <p
+                className={`flex flex-wrap items-center gap-2 ${
+                  theme == "dark" ? "text-white" : "text-gray-700"
+                }`}
+              >
                 <FaClipboardList className="inline-block text-teal-500 text-xl" />
                 <strong> Application Method:</strong>{" "}
                 {application.applicationMethod}
               </p>
-              <p className="flex flex-wrap items-center gap-2 text-gray-700">
+              <p
+                className={`flex flex-wrap items-center gap-2 ${
+                  theme == "dark" ? "text-white" : "text-gray-700"
+                }`}
+              >
                 <BsCalendar className="inline text-purple-500 text-xl" />
                 <strong> Applied Date:</strong>{" "}
                 {new Date(application.appliedDate).toLocaleDateString()}
               </p>
-              <p className="flex flex-wrap items-center gap-2 text-gray-700">
+              <p
+                className={`flex flex-wrap items-center gap-2 ${
+                  theme == "dark" ? "text-white" : "text-gray-700"
+                }`}
+              >
                 <FaUserAlt className="inline-block text-orange-500 text-xl" />
                 <strong> Applicant's Name:</strong>{" "}
                 {`${application.firstName} ${application.lastName}`}
               </p>
-              <p className="flex flex-wrap items-center gap-2 text-gray-700">
+              <p
+                className={`flex flex-wrap items-center gap-2 ${
+                  theme == "dark" ? "text-white" : "text-gray-700"
+                }`}
+              >
                 <HiOutlineMail className="inline-block text-teal-500 text-xl" />
                 <strong> Applicant's Email:</strong> {application.email}
               </p>

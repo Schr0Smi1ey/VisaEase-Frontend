@@ -5,24 +5,25 @@ import {
   FaInstagram,
   FaLinkedinIn,
 } from "react-icons/fa";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
 
 const Footer = () => {
   useEffect(() => {
     AOS.init({ duration: 500 });
   }, []);
-
+  const { theme } = useContext(AuthContext);
   return (
-    <div className="p-10">
+    <div className={`py-10 ${theme == "dark" ? "text-white" : ""}`}>
       <div className="container mx-auto">
         {/* Branding */}
         <div data-aos="fade-down" className="text-center">
           <h3 className="flex justify-center items-center gap-3 font-bold text-3xl mb-3">
             Visa<span className="text-primary">Ease</span>
           </h3>
-          <p className="font-medium text-base text-gray-600">
+          <p className="font-medium text-base">
             Simplifying the visa application process with smart and efficient
             solutions.
           </p>
@@ -32,13 +33,13 @@ const Footer = () => {
         <div data-aos="fade-down" className="divider my-5"></div>
 
         {/* Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 text-gray-600">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Column 1: Navigation */}
           <div
             data-aos="fade-up"
             className="flex mx-auto items-center md:items-start flex-col gap-2"
           >
-            <h2 className="mb-3 font-bold text-xl text-black">Navigation</h2>
+            <h2 className="mb-3 font-bold text-xl ">Navigation</h2>
             <Link className="hover:text-primary hover:font-semibold" to="/home">
               Home
             </Link>
@@ -67,7 +68,7 @@ const Footer = () => {
             data-aos="fade-up"
             className="flex flex-col mx-auto items-center md:items-start gap-2"
           >
-            <h2 className="mb-3 font-bold text-xl text-black">Company</h2>
+            <h2 className="mb-3 font-bold text-xl ">Company</h2>
             <Link
               className="hover:text-primary hover:font-semibold"
               to="/about"
@@ -99,7 +100,7 @@ const Footer = () => {
             data-aos="fade-up"
             className="flex flex-col mx-auto items-center md:items-start gap-2"
           >
-            <h2 className="mb-3 font-bold text-xl text-black">Resources</h2>
+            <h2 className="mb-3 font-bold text-xl ">Resources</h2>
             <Link className="hover:text-primary hover:font-semibold" to="/faq">
               FAQs
             </Link>
@@ -125,13 +126,13 @@ const Footer = () => {
             data-aos="fade-up"
             className="flex flex-col mx-auto items-center md:items-start gap-2"
           >
-            <h2 className="mb-3 font-bold text-xl text-black">Follow Us</h2>
+            <h2 className="mb-3 font-bold text-xl ">Follow Us</h2>
             <div className="flex gap-4">
               <a
                 href="https://www.facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xl text-gray-600 hover:text-primary"
+                className="text-xl hover:text-primary"
               >
                 <FaFacebookF />
               </a>
@@ -139,7 +140,7 @@ const Footer = () => {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xl text-gray-600 hover:text-primary"
+                className="text-xl hover:text-primary"
               >
                 <FaTwitter />
               </a>
@@ -147,7 +148,7 @@ const Footer = () => {
                 href="https://www.instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xl text-gray-600 hover:text-primary"
+                className="text-xl hover:text-primary"
               >
                 <FaInstagram />
               </a>
@@ -155,7 +156,7 @@ const Footer = () => {
                 href="https://www.linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xl text-gray-600 hover:text-primary"
+                className="text-xl hover:text-primary"
               >
                 <FaLinkedinIn />
               </a>
@@ -164,7 +165,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Bottom */}
-        <p className="text-center text-gray-500 mt-10">
+        <p className="text-center mt-10">
           &copy; {new Date().getFullYear()} VisaEase. All Rights Reserved.
         </p>
       </div>

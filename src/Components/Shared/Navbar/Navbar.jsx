@@ -6,33 +6,31 @@ import { FaSun, FaMoon } from "react-icons/fa";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 const NavBar = () => {
-  const { user, signOutUser, Toast, setLoading } = useContext(AuthContext);
+  const { user, signOutUser, Toast, setLoading, theme, setTheme, toggleTheme } =
+    useContext(AuthContext);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scroll, setScroll] = useState(false);
   const navigate = useNavigate();
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  //   const handleScroll = () => {
+  //     if (window.scrollY > 50) {
+  //       setScroll(true);
+  //     } else {
+  //       setScroll(false);
+  //     }
+  //   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScroll(true);
-      } else {
-        setScroll(false);
-      }
-    };
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
+  // useEffect(() => {
+  //   document.documentElement.setAttribute("data-theme", theme);
+  //   localStorage.setItem("theme", theme);
+  // }, [theme]);
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-  };
+  // const toggleTheme = () => {
+  //   setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  // };
   const toggleMenuDropdown = () => {
     setIsMenuOpen(!isMenuOpen);
     setIsProfileOpen(false);
@@ -67,7 +65,11 @@ const NavBar = () => {
     hideSignOutModal();
   };
   const navElements = (
-    <ul className="flex flex-col text-center lg:flex-row items-center justify-center gap-2 sm:gap-5 font-medium text-lg">
+    <ul
+      className={`flex flex-col text-center lg:flex-row items-center justify-center gap-2 sm:gap-5 font-medium text-lg ${
+        theme == "dark" ? "text-white" : "text-black"
+      }`}
+    >
       {
         <div className="flex sm:hidden">
           <button
@@ -107,7 +109,11 @@ const NavBar = () => {
   const navElementsEnd = (
     <div className="flex items-center justify-center sm:justify-left gap-1 sm:gap-5">
       {user && (
-        <div className="hidden sm:flex dropdown dropdown-end text-black">
+        <div
+          className={`hidden sm:flex dropdown dropdown-end ${
+            theme == "dark" ? "text-white" : "text-black"
+          }`}
+        >
           <div
             tabIndex={0}
             role="button"
@@ -204,8 +210,10 @@ const NavBar = () => {
   );
   return (
     <div
-      className={`navbar shadow-md rounded-b-md container mx-auto center z-[70] w-[98%] sm:w-full md:w-[96%] py-2 px-3 md:py-3 md:px-5 flex justify-between items-center my-5 fixed top-0 left-[49.8%] sm:left-[50.7%] md:left-[50.7%] lg:left-1/2 xl:left-[50.1%]  transform -translate-x-1/2 transition-all duration-500 -translate-y-4 ${
-        scroll ? "bg-primary mt-4 rounded-b-2xl" : "bg-white"
+      className={`navbar shadow-md rounded-b-md container mx-auto center z-[70] w-[98%] sm:w-full md:w-[96%] py-3 px-3 md:py-4 md:px-5 flex justify-between items-center my-4 fixed top-0 left-[49.8%] sm:left-[50.7%] md:left-[50.7%] lg:left-1/2 xl:left-[50.1%]  transform -translate-x-1/2 transition-all duration-500 -translate-y-4 ${
+        scroll
+          ? "bg-primary mt-4 rounded-b-2xl"
+          : `${theme == "dark" ? "bg-black" : "bg-white"}`
       }`}
     >
       <dialog

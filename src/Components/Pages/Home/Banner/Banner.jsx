@@ -44,7 +44,7 @@ const Banner = () => {
       imgSrc: slide3,
     },
   ];
-  const { user } = useContext(AuthContext);
+  const { user, theme } = useContext(AuthContext);
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   useEffect(() => {
@@ -60,18 +60,15 @@ const Banner = () => {
     setCurrentSlide((prev) => (prev + 1) % sliderContent.length);
   };
 
-  const handleLearningBtn = () => {
-    navigate("/start-learning");
-  };
   const { id, title, description, buttonText, imgSrc } =
     sliderContent[currentSlide];
-  const handleType = (count) => {
-    // access word count number
-    console.log(count);
-  };
 
   return (
-    <section className="md:container mx-auto my-5">
+    <section
+      className={`md:container mx-auto my-5 ${
+        theme == "dark" ? "text-white" : "text-black"
+      }`}
+    >
       <div className="carousel w-full">
         <div
           key={id}
@@ -105,14 +102,14 @@ const Banner = () => {
                         typeSpeed={70}
                         deleteSpeed={50}
                         delaySpeed={1000}
-                        // onLoopDone={handleDone}
-                        onType={handleType}
                       />
                     </h1>
                   </Slide>
                 </h1>
                 <p
-                  className="font-normal text-base text-gray-800 mb-6"
+                  className={`font-normal ${
+                    theme == "dark" ? "text-gray-200" : "text-gray-600"
+                  } mb-6`}
                   data-aos="fade-left"
                   data-aos-delay="200"
                 >

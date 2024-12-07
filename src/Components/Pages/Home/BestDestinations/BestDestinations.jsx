@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
+import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 
 const BestDestinations = () => {
   const destinations = [
@@ -38,14 +39,14 @@ const BestDestinations = () => {
       hotels: "36 Hotels Available",
     },
   ];
-
+  const { theme } = useContext(AuthContext);
   return (
-    <div className="py-12">
+    <div className={`py-12 ${theme == "dark" ? "text-white" : "text-black"}`}>
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-extrabold text-gray-800 mb-4 text-center">
+        <h2 className="text-2xl md:text-3xl lg:text-5xl font-extrabold mb-4 text-center">
           Most Popular Destinations
         </h2>
-        <p className="text-center text-gray-600 mb-8">
+        <p className="text-center mb-8 md:w-1/3 mx-auto">
           Expand your travel horizons with new facets! Explore the world by
           choosing your ideal travel destinations.
         </p>

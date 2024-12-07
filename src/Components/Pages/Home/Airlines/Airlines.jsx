@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import BD_Airlines from "../../../../assets/BD_Airlines.png";
 import US_Bangla_Airlines from "../../../../assets/US_Bangla.jpg";
 import Novo_Air from "../../../../assets/novo_air.jpg";
@@ -10,6 +10,7 @@ import Qatar_Airways from "../../../../assets/Qatar_airways.png";
 import Malaysia_Airlines from "../../../../assets/Malaysia_Airlines.jpg";
 import Etihad_Airways from "../../../../assets/Etihad_airways.jpg";
 import Cathay_Pacific_Airways from "../../../../assets/Cathay_Pacific_Airways.jpg";
+import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 const Airlines = () => {
   // Mock data for airlines
   const airlines = [
@@ -69,15 +70,15 @@ const Airlines = () => {
       logo: Cathay_Pacific_Airways,
     },
   ];
-
+  const { theme } = useContext(AuthContext);
   return (
-    <div className="py-12">
+    <div className={`py-12 ${theme == "dark" ? "text-white" : "text-black"}`}>
       <div className="container mx-auto px-6 text-center">
         {/* Section Header */}
-        <h2 className="text-3xl font-extrabold text-gray-800 mb-4">
+        <h2 className="text-2xl md:text-3xl lg:text-5xl font-extrabold mb-4">
           Search Top Airlines
         </h2>
-        <p className="text-gray-600 mb-8">
+        <p className="mb-8 md:w-1/3 mx-auto">
           Our user-friendly platform connects you to top airlines instantly.
           Enjoy a comfortable and hassle-free journey!
         </p>
@@ -87,7 +88,9 @@ const Airlines = () => {
           {airlines.map((airline) => (
             <div
               key={airline.id}
-              className="flex items-center justify-between bg-white shadow rounded-lg p-4 hover:shadow-lg transition"
+              className={`flex items-center justify-between ${
+                theme == "dark" ? "bg-gray-900" : "bg-white"
+              } shadow rounded-lg p-4 hover:shadow-lg transition`}
             >
               <div className="flex items-center">
                 <img
@@ -95,9 +98,7 @@ const Airlines = () => {
                   alt={airline.name}
                   className="w-16 h-16 mr-4 rounded-full"
                 />
-                <span className="text-gray-800 font-medium">
-                  {airline.name}
-                </span>
+                <span className="font-medium">{airline.name}</span>
               </div>
               <span className="text-primary text-lg font-bold">›</span>
             </div>

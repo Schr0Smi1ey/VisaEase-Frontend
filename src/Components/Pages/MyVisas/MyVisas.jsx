@@ -10,7 +10,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 
 const MyAddedVisas = () => {
-  const { user, Toast } = useContext(AuthContext);
+  const { user, Toast, theme } = useContext(AuthContext);
   const [visas, setVisas] = useState([]);
   const [filteredVisas, setFilteredVisas] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -167,7 +167,11 @@ const MyAddedVisas = () => {
   };
 
   return (
-    <div className="container mx-auto px-4">
+    <div
+      className={`container ${
+        theme == "dark" ? "text-white" : "text-black"
+      } mx-auto px-4`}
+    >
       {/* <h1 className="text-3xl text-center font-bold mb-6 text-primary">
         My Added Visas
       </h1>
@@ -184,9 +188,9 @@ const MyAddedVisas = () => {
               className="border-2 border-gray-100 mx-auto object-cover rounded-lg mb-4"
             />
             <h3 className="font-bold text-xl mb-2">{visa.countryName}</h3>
-            <p className="flex flex-wrap items-center gap-2 text-gray-700">
+            <p className={`flex flex-wrap items-center gap-2 ${theme == "dark" ? "text-white" : "text-gray-700"}`}>
               <FiType className="text-green-500 text-xl" />
-              <strong className="text-gray-900">Visa Type:</strong>{" "}
+              <strong >Visa Type:</strong>{" "}
               {visa.visaType}
             </p>
             <p className="flex flex-wrap items-center gap-2 text-gray-700 border-2 border-red-500">
@@ -196,18 +200,18 @@ const MyAddedVisas = () => {
               </strong>{" "}
               {visa.processingTime}
             </p>
-            <p className="flex flex-wrap items-center gap-2 text-gray-700">
+            <p className={`flex flex-wrap items-center gap-2 ${theme == "dark" ? "text-white" : "text-gray-700"}`}>
               <RiMoneyDollarCircleLine className="text-green-600 text-xl" />
-              <strong className="text-gray-900">Fee:</strong> ${visa.fee}
+              <strong >Fee:</strong> ${visa.fee}
             </p>
-            <p className="flex flex-wrap items-center gap-2 text-gray-700">
+            <p className={`flex flex-wrap items-center gap-2 ${theme == "dark" ? "text-white" : "text-gray-700"}`}>
               <BsCalendarCheck className="text-purple-500 text-xl" />
-              <strong className="text-gray-900">Validity:</strong>{" "}
+              <strong >Validity:</strong>{" "}
               {visa.validity}
             </p>
-            <p className="flex flex-wrap items-center gap-2 text-gray-700">
+            <p className={`flex flex-wrap items-center gap-2 ${theme == "dark" ? "text-white" : "text-gray-700"}`}>
               <FaClipboardList className="text-teal-500 text-xl" />
-              <strong className="text-gray-900">
+              <strong >
                 Application Method:
               </strong>{" "}
               {visa.applicationMethod}
@@ -273,7 +277,9 @@ const MyAddedVisas = () => {
           {filteredVisas.map((visa) => (
             <div
               key={visa._id}
-              className="bg-white flex flex-col rounded-lg shadow-lg p-2 md:p-3 lg:p-4"
+              className={`flex ${
+                theme == "dark" ? "bg-gray-950" : "bg-white"
+              } flex-col rounded-lg shadow-lg p-2 md:p-3 lg:p-4`}
             >
               <img
                 src={visa.countryImage}
@@ -282,33 +288,45 @@ const MyAddedVisas = () => {
               />
               <div className="flex-grow">
                 <h3 className="font-bold text-xl mb-2">{visa.countryName}</h3>
-                <p className="flex flex-wrap items-center gap-2 text-gray-700">
+                <p
+                  className={`flex flex-wrap items-center gap-2 ${
+                    theme == "dark" ? "text-white" : "text-gray-700"
+                  }`}
+                >
                   <FiType className="text-green-500 text-xl" />
-                  <strong className="text-gray-900">Visa Type:</strong>{" "}
-                  {visa.visaType}
+                  <strong>Visa Type:</strong> {visa.visaType}
                 </p>
-                <p className="flex flex-wrap items-center gap-2 text-gray-700">
+                <p
+                  className={`flex flex-wrap items-center gap-2 ${
+                    theme == "dark" ? "text-white" : "text-gray-700"
+                  }`}
+                >
                   <BiTimeFive className="text-blue-500 text-xl" />
-                  <strong className="text-gray-900 inline-block">
-                    Processing Time:
-                  </strong>{" "}
-                  {visa.processingTime}
+                  <strong>Processing Time:</strong> {visa.processingTime}
                 </p>
-                <p className="flex flex-wrap items-center gap-2 text-gray-700">
+                <p
+                  className={`flex flex-wrap items-center gap-2 ${
+                    theme == "dark" ? "text-white" : "text-gray-700"
+                  }`}
+                >
                   <RiMoneyDollarCircleLine className="text-green-600 text-xl" />
-                  <strong className="text-gray-900">Fee:</strong> ${visa.fee}
+                  <strong>Fee:</strong> ${visa.fee}
                 </p>
-                <p className="flex flex-wrap items-center gap-2 text-gray-700">
+                <p
+                  className={`flex flex-wrap items-center gap-2 ${
+                    theme == "dark" ? "text-white" : "text-gray-700"
+                  }`}
+                >
                   <BsCalendarCheck className="text-purple-500 text-xl" />
-                  <strong className="text-gray-900">Validity:</strong>{" "}
-                  {visa.validity}
+                  <strong>Validity:</strong> {visa.validity}
                 </p>
-                <p className="flex flex-wrap items-center gap-2 text-gray-700">
+                <p
+                  className={`flex items-center gap-2 ${
+                    theme == "dark" ? "text-white" : "text-gray-700"
+                  }`}
+                >
                   <FaClipboardList className="text-teal-500 text-xl" />
-                  <strong className="text-gray-900">
-                    Application Method:
-                  </strong>{" "}
-                  {visa.applicationMethod}
+                  <strong>Application Method:</strong> {visa.applicationMethod}
                 </p>
               </div>
               <div className="flex gap-3 mt-4">

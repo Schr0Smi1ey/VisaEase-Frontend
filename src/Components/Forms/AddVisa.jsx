@@ -19,7 +19,7 @@ const AddVisa = () => {
     applicationMethod: "",
     addedBy: "",
   });
-  const { user } = useContext(AuthContext);
+  const { user, theme } = useContext(AuthContext);
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
 
@@ -81,7 +81,11 @@ const AddVisa = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div
+      className={`container ${
+        theme == "dark" ? "text-white" : "text-black"
+      } mx-auto px-4 py-8`}
+    >
       <Helmet>
         <title>VisaEase | Add-Visa</title>
       </Helmet>
@@ -90,7 +94,9 @@ const AddVisa = () => {
       </h1>
       <form
         onSubmit={handleSubmit}
-        className="bg-white shadow-lg rounded-lg p-6 max-w-3xl mx-auto"
+        className={`${
+          theme == "dark" ? "bg-gray-950" : "bg-white"
+        } shadow-lg rounded-lg p-6 max-w-3xl mx-auto`}
       >
         <div className="mb-4">
           <label
