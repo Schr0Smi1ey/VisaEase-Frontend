@@ -10,6 +10,9 @@ import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { BsCalendarCheck } from "react-icons/bs";
 import { HiOutlineMail } from "react-icons/hi";
 import { Helmet } from "react-helmet";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
+
 const VisaDetails = () => {
   const visaData = useLoaderData();
   const { user, Toast } = useContext(AuthContext);
@@ -46,18 +49,29 @@ const VisaDetails = () => {
       .then((res) => {
         console.log(res);
         if (res.ok) {
-          Toast("Application submitted successfully", "success");
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Application submitted successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
           setIsModalOpen(false);
         } else {
           if (res.status === 400) {
-            Toast("Application already exists", "error");
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Application already exists",
+              showConfirmButton: false,
+              timer: 1500,
+            });
           } else {
             Toast("Failed to submit application", "error");
           }
         }
       })
       .catch((error) => {
-        console.log(error);
         Toast(error.message, "error");
       });
   };

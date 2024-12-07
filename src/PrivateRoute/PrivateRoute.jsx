@@ -20,7 +20,7 @@ const PrivateRoute = ({ children }) => {
   if (loading || (!user && !isRedirecting)) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <ScaleLoader color="#FF6363" height={50} width={8} />
+        <ScaleLoader color="#FF6363" height={100} width={8} />
       </div>
     );
   }

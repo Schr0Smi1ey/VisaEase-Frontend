@@ -6,6 +6,8 @@ import { BiTimeFive } from "react-icons/bi";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { BsCalendarCheck } from "react-icons/bs";
 import { Helmet } from "react-helmet";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 const MyAddedVisas = () => {
   const { user, Toast } = useContext(AuthContext);
@@ -43,7 +45,7 @@ const MyAddedVisas = () => {
         setFilteredVisas(userVisas); // Initialize filteredVisas
       })
       .catch((error) => console.error("Error fetching visas:", error));
-  }, [user]);
+  }, [user, visas]);
 
   // Handle search input change
   const handleSearchChange = (e) => {
@@ -106,34 +108,62 @@ const MyAddedVisas = () => {
 
   // Handle visa delete
   const handleDelete = (visaId) => {
-    fetch(`http://localhost:5000/Visa/${visaId}`, { method: "DELETE" })
-      .then(() => {
-        Toast("Visa deleted successfully", "success");
-        setVisas(visas.filter((visa) => visa._id !== visaId));
-      })
-      .catch((error) => Toast(error.message, "error"));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#FF4500",
+      cancelButtonColor: "#32CD32",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/Visa/${visaId}`, { method: "DELETE" })
+          .then(() => {
+            setVisas(visas.filter((visa) => visa._id !== visaId));
+          })
+          .catch((error) => Toast(error.message, "error"));
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const updatedVisa = { ...visaData }; // Merge visaData with selectedVisa
-    console.log("updatedVisa", updatedVisa);
+    const updatedVisa = { ...visaData };
     fetch(`http://localhost:5000/Visa/${selectedVisa._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedVisa),
     })
       .then((result) => {
-        Toast("Visa updated successfully", "success");
-        setIsModalOpen(false);
         setVisas(
           visas.map((visa) =>
             visa._id === selectedVisa._id ? updatedVisa : visa
           )
         );
-        console.log(result);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Application updated successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setIsModalOpen(false);
       })
-      .catch((error) => Toast(error.message, "error"));
+      .catch((error) =>
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Failed to update visa",
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      );
   };
 
   return (
@@ -215,10 +245,16 @@ const MyAddedVisas = () => {
           className="input input-bordered w-full md:w-1/2"
         />
         <div className="flex gap-2">
-          <button onClick={handleSearch} className="btn btn-primary px-4 py-2">
+          <button
+            onClick={handleSearch}
+            className="bg-green-500 font-bold text-lg rounded-lg px-4 py-2"
+          >
             Search
           </button>
-          <button onClick={resetSearch} className="btn btn-secondary px-4 py-2">
+          <button
+            onClick={resetSearch}
+            className="bg-red-500 font-bold text-lg rounded-lg px-4 py-2"
+          >
             Reset
           </button>
         </div>
@@ -237,42 +273,44 @@ const MyAddedVisas = () => {
           {filteredVisas.map((visa) => (
             <div
               key={visa._id}
-              className="bg-white rounded-lg shadow-lg p-2 md:p-3 lg:p-4"
+              className="bg-white flex flex-col rounded-lg shadow-lg p-2 md:p-3 lg:p-4"
             >
               <img
                 src={visa.countryImage}
                 alt={visa.countryName}
                 className="border-2 border-gray-100 mx-auto object-cover rounded-lg mb-4"
               />
-              <h3 className="font-bold text-xl mb-2">{visa.countryName}</h3>
-              <p className="flex flex-wrap items-center gap-2 text-gray-700">
-                <FiType className="text-green-500 text-xl" />
-                <strong className="text-gray-900">Visa Type:</strong>{" "}
-                {visa.visaType}
-              </p>
-              <p className="flex flex-wrap items-center gap-2 text-gray-700">
-                <BiTimeFive className="text-blue-500 text-xl" />
-                <strong className="text-gray-900 inline-block">
-                  Processing Time:
-                </strong>{" "}
-                {visa.processingTime}
-              </p>
-              <p className="flex flex-wrap items-center gap-2 text-gray-700">
-                <RiMoneyDollarCircleLine className="text-green-600 text-xl" />
-                <strong className="text-gray-900">Fee:</strong> ${visa.fee}
-              </p>
-              <p className="flex flex-wrap items-center gap-2 text-gray-700">
-                <BsCalendarCheck className="text-purple-500 text-xl" />
-                <strong className="text-gray-900">Validity:</strong>{" "}
-                {visa.validity}
-              </p>
-              <p className="flex flex-wrap items-center gap-2 text-gray-700">
-                <FaClipboardList className="text-teal-500 text-xl" />
-                <strong className="text-gray-900">
-                  Application Method:
-                </strong>{" "}
-                {visa.applicationMethod}
-              </p>
+              <div className="flex-grow">
+                <h3 className="font-bold text-xl mb-2">{visa.countryName}</h3>
+                <p className="flex flex-wrap items-center gap-2 text-gray-700">
+                  <FiType className="text-green-500 text-xl" />
+                  <strong className="text-gray-900">Visa Type:</strong>{" "}
+                  {visa.visaType}
+                </p>
+                <p className="flex flex-wrap items-center gap-2 text-gray-700">
+                  <BiTimeFive className="text-blue-500 text-xl" />
+                  <strong className="text-gray-900 inline-block">
+                    Processing Time:
+                  </strong>{" "}
+                  {visa.processingTime}
+                </p>
+                <p className="flex flex-wrap items-center gap-2 text-gray-700">
+                  <RiMoneyDollarCircleLine className="text-green-600 text-xl" />
+                  <strong className="text-gray-900">Fee:</strong> ${visa.fee}
+                </p>
+                <p className="flex flex-wrap items-center gap-2 text-gray-700">
+                  <BsCalendarCheck className="text-purple-500 text-xl" />
+                  <strong className="text-gray-900">Validity:</strong>{" "}
+                  {visa.validity}
+                </p>
+                <p className="flex flex-wrap items-center gap-2 text-gray-700">
+                  <FaClipboardList className="text-teal-500 text-xl" />
+                  <strong className="text-gray-900">
+                    Application Method:
+                  </strong>{" "}
+                  {visa.applicationMethod}
+                </p>
+              </div>
               <div className="flex gap-3 mt-4">
                 <button
                   onClick={() => handleUpdate(visa)}
@@ -282,7 +320,7 @@ const MyAddedVisas = () => {
                 </button>
                 <button
                   onClick={() => handleDelete(visa._id)}
-                  className="px-4 py-1 rounded-md bg-gray-200"
+                  className="px-4 py-1 rounded-md bg-red-500 text-white font-medium"
                 >
                   Delete
                 </button>

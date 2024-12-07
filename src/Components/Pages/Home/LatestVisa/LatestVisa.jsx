@@ -26,7 +26,7 @@ const LatestVisas = () => {
       <div className="text-center mt-8">
         <button
           onClick={() => navigate("/all-visas")}
-          className="btn bg-blue-500 text-white px-6 py-2 hover:bg-blue-600"
+          className="px-4 py-2 rounded-lg font-semibold btn bg-primary/[130] text-white"
         >
           See All Visas
         </button>

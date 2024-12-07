@@ -171,7 +171,7 @@ const NavBar = () => {
       <div className="hidden sm:flex">
         <button
           onClick={toggleTheme}
-          className="p-2 bg-gray-200 dark:bg-gray-800 rounded-full"
+          className="p-2 bg-white shadow-lg rounded-full"
         >
           {theme === "light" ? (
             <>
@@ -181,7 +181,7 @@ const NavBar = () => {
                 data-tooltip-place="bottom"
                 data-tooltip-offset={20}
                 data-tooltip-variant="info"
-                className="text-gray-800 z-[100] dark:text-yellow-500 text-xl"
+                className="z-[100] dark:text-yellow-500 text-xl"
               />
               <Tooltip id="theme-tooltip" className="z-[110]" />
             </>

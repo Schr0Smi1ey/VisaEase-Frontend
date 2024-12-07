@@ -8,6 +8,8 @@ import { BsCalendar } from "react-icons/bs";
 import { HiOutlineMail } from "react-icons/hi";
 import { FaUserAlt, FaClipboardList } from "react-icons/fa";
 import { Helmet } from "react-helmet";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 const MyVisaApplications = () => {
   const { user, Toast } = useContext(AuthContext);
@@ -31,20 +33,47 @@ const MyVisaApplications = () => {
   }, []);
   // Handle Cancel Application
   const handleCancel = (applicationId) => {
-    console.log(applicationId);
-    fetch(`http://localhost:5000/Applications/${applicationId}`, {
-      method: "DELETE",
-    })
-      .then((result) => {
-        console.log(result);
-        Toast("Application cancelled successfully", "success");
-        setApplications(
-          applications.filter(
-            (application) => application._id !== applicationId
-          )
-        );
-      })
-      .catch((error) => Toast(error.message, "error"));
+    // fetch(`http://localhost:5000/Applications/${applicationId}`, {
+    //   method: "DELETE",
+    // })
+    //   .then((result) => {
+    //     console.log(result);
+    //     Toast("Application cancelled successfully", "success");
+    //     setApplications(
+    //       applications.filter(
+    //         (application) => application._id !== applicationId
+    //       )
+    //     );
+    //   })
+    //   .catch((error) => Toast(error.message, "error"));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#FF4500",
+      cancelButtonColor: "#32CD32",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/Applications/${applicationId}`, {
+          method: "DELETE",
+        })
+          .then((result) => {
+            setApplications(
+              applications.filter(
+                (application) => application._id !== applicationId
+              )
+            );
+          })
+          .catch((error) => Toast(error.message, "error"));
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
   };
 
   return (

@@ -50,7 +50,7 @@ const VisaCard = ({ visa }) => {
         <div className="mt-3">
           <Link
             to={`/visa-details/${visa._id}`}
-            className="btn btn-primary w-full text-white font-semibold"
+            className="px-4 py-2 block text-center text-lg rounded-lg bg-primary/90 w-full text-white font-semibold"
           >
             See Details
           </Link>

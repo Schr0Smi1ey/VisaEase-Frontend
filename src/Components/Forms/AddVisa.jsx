@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 import { Helmet } from "react-helmet";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 const AddVisa = () => {
   const [visaData, setVisaData] = useState({
@@ -44,8 +46,13 @@ const AddVisa = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        toast.success("Visa added successfully!");
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Visa added successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         setVisaData({
           countryImage: "",
           countryName: "",
@@ -60,7 +67,15 @@ const AddVisa = () => {
           addedBy: "",
         });
       })
-      .catch(() => toast.error("Error adding visa. Please try again."));
+      .catch((error) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Failed to add visa",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
   };
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -288,7 +303,7 @@ const AddVisa = () => {
 
         <button
           type="submit"
-          className="btn btn-primary w-full mt-4 text-white font-bold"
+          className="btn bg-primary/[130] text-xl w-full mt-4 text-white font-bold"
         >
           Add Visa
         </button>
