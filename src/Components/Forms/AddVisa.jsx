@@ -70,6 +70,7 @@ const AddVisa = () => {
           applicationMethod: "",
           addedBy: "",
         });
+        e.target.reset();
       })
       .catch((error) => {
         Swal.fire({

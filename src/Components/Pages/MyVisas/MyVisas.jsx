@@ -34,7 +34,6 @@ const MyAddedVisas = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    setSearchTerm("");
     Aos.init({ duration: 500 });
   }, []);
 
@@ -47,9 +46,10 @@ const MyAddedVisas = () => {
         setFilteredVisas(userVisas);
       })
       .catch((error) => Toast(error.message, "error"));
-  }, [user, visas]);
+  }, [user]);
 
   const handleSearchChange = (e) => {
+    e.preventDefault();
     setSearchTerm(e.target.value);
   };
 
@@ -101,17 +101,19 @@ const MyAddedVisas = () => {
       addedBy: visa.addedBy,
     });
     setIsModalOpen(true);
+    document.getElementById("update_modal").showModal();
   };
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const updatedVisa = { ...visaData };
+    console.log(updatedVisa);
     fetch(`https://visaease.vercel.app/Visa/${selectedVisa._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedVisa),
     })
       .then(() => {
-        setVisas(
+        setFilteredVisas(
           visas.map((visa) =>
             visa._id === selectedVisa._id ? updatedVisa : visa
           )
@@ -137,6 +139,7 @@ const MyAddedVisas = () => {
   };
 
   const handleDelete = (visaId) => {
+    console.log(visaId);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -151,7 +154,7 @@ const MyAddedVisas = () => {
           method: "DELETE",
         })
           .then(() => {
-            setVisas(visas.filter((visa) => visa._id !== visaId));
+            setFilteredVisas(visas.filter((visa) => visa._id !== visaId));
           })
           .catch((error) => Toast(error.message, "error"));
         Swal.fire({
@@ -288,15 +291,14 @@ const MyAddedVisas = () => {
           ))}
         </div>
       )}
-      {isModalOpen && selectedVisa && (
-        <div
-          className={`fixed inset-0 flex items-center justify-center ${
-            theme == "dark" ? "text-white" : "text-black"
-          }z-50 mt-8`}
+      {
+        <dialog
+          id="update_modal"
+          className={`modal modal-bottom sm:modal-middle`}
         >
           <div className="modal-box w-full max-w-lg  rounded-lg shadow-lg p-6">
             <h2 className="text-2xl font-bold text-primary mb-4">
-              Update {selectedVisa.countryName} Visa
+              Update {visaData.countryName} Visa
             </h2>
             <form onSubmit={handleFormSubmit}>
               <div className="mb-4">
@@ -450,13 +452,18 @@ const MyAddedVisas = () => {
               <div className="modal-action flex gap-2 justify-end">
                 <button
                   type="button"
-                  onClick={() => setIsModalOpen(false)}
+                  onClick={() =>
+                    document.getElementById("update_modal").close()
+                  }
                   className="px-4 py-2 bg-red-500 text-white text-lg font-semibold rounded-lg"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
+                  onClick={() =>
+                    document.getElementById("update_modal").close()
+                  }
                   className="px-4 py-2 bg-green-500 text-white text-lg font-semibold rounded-lg"
                 >
                   Update
@@ -464,8 +471,8 @@ const MyAddedVisas = () => {
               </div>
             </form>
           </div>
-        </div>
-      )}
+        </dialog>
+      }
     </div>
   );
 };

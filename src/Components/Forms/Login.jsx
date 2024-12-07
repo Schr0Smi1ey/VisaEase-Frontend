@@ -9,7 +9,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const Login = () => {
-  const { signInUser, signInWithGoogle, Toast, setLoading } =
+  const { signInUser, signInWithGoogle, Toast, setLoading, theme } =
     useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -56,11 +56,19 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-bl from-primary/10 to-primary/5">
+    <div
+      className={`min-h-screen flex items-center justify-center bg-gradient-to-bl from-primary/10 to-primary/5 ${
+        theme == "dark" ? "text-white" : "text-black"
+      }`}
+    >
       <Helmet>
         <title>VisaEase | Login</title>
       </Helmet>
-      <div className="flex w-full max-w-5xl shadow-lg bg-white rounded-lg overflow-hidden">
+      <div
+        className={`flex w-full max-w-5xl shadow-lg ${
+          theme == "dark" ? "bg-gray-950" : "bg-white"
+        } rounded-lg overflow-hidden`}
+      >
         <div
           className="hidden md:flex md:w-1/2 bg-primary text-white flex-col items-center justify-center p-8"
           data-aos="fade-right"
@@ -84,7 +92,9 @@ const Login = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
+                className={`block text-sm font-medium ${
+                  theme == "dark" ? "text-white" : "text-gray-700"
+                }`}
               >
                 Email
               </label>
@@ -102,7 +112,9 @@ const Login = () => {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
+                className={`block text-sm font-medium ${
+                  theme == "dark" ? "text-white" : "text-gray-700"
+                }`}
               >
                 Password
               </label>
@@ -146,10 +158,7 @@ const Login = () => {
             </button>
           </form>
 
-          <div className="relative my-6 text-center">
-            <span className="bg-white px-2 text-sm text-gray-500">OR</span>
-            <div className="absolute inset-0 border-t border-gray-300"></div>
-          </div>
+          <div className="divider">OR</div>
 
           <button
             onClick={handleSignInWithGoogle}

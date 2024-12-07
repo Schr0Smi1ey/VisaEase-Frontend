@@ -11,8 +11,14 @@ import "aos/dist/aos.css";
 const SignUp = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { createUser, Toast, updateUserProfile, signInWithGoogle, setLoading } =
-    useContext(AuthContext);
+  const {
+    createUser,
+    Toast,
+    updateUserProfile,
+    signInWithGoogle,
+    setLoading,
+    theme,
+  } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
   const [formData, setFormData] = useState({
@@ -105,11 +111,19 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-t from-primary/20 to-primary/10 flex items-center justify-center">
+    <div
+      className={`min-h-screen bg-gradient-to-t from-primary/20 to-primary/10 flex items-center justify-center ${
+        theme == "dark" ? "text-white" : "text-black"
+      }`}
+    >
       <Helmet>
         <title>VisaEase | Sign Up</title>
       </Helmet>
-      <div className="flex bg-white rounded-lg shadow-xl w-full max-w-5xl overflow-hidden">
+      <div
+        className={`flex ${
+          theme == "dark" ? "bg-gray-950" : "bg-white"
+        } rounded-lg shadow-xl w-full max-w-5xl overflow-hidden`}
+      >
         <div
           data-aos="fade-right"
           className="hidden md:flex w-1/2 bg-gradient-to-r from-primary to-primary/70 text-white flex-col items-center justify-center p-8"
@@ -133,7 +147,9 @@ const SignUp = () => {
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
+                className={`block text-sm font-medium mb-2 ${
+                  theme == "dark" ? "text-white" : "text-gray-700"
+                }`}
               >
                 Name
               </label>
@@ -151,7 +167,9 @@ const SignUp = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
+                className={`block text-sm mb-2 font-medium ${
+                  theme == "dark" ? "text-white" : "text-gray-700"
+                }`}
               >
                 Email
               </label>
@@ -169,7 +187,9 @@ const SignUp = () => {
             <div>
               <label
                 htmlFor="photoURL"
-                className="block text-sm font-medium text-gray-700"
+                className={`block text-sm mb-2 font-medium ${
+                  theme == "dark" ? "text-white" : "text-gray-700"
+                }`}
               >
                 Photo URL
               </label>
@@ -186,7 +206,9 @@ const SignUp = () => {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
+                className={`block text-sm mb-2 font-medium ${
+                  theme == "dark" ? "text-white" : "text-gray-700"
+                }`}
               >
                 Password
               </label>

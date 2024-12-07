@@ -65,6 +65,20 @@ const NavBar = () => {
         theme == "dark" ? "text-white" : "text-black"
       }`}
     >
+      {
+        <div className="flex sm:hidden">
+          <button
+            onClick={toggleTheme}
+            className="p-2 bg-gray-200 dark:bg-gray-800 rounded-full"
+          >
+            {theme == "light" ? (
+              <FaMoon className="text-gray-800 dark:text-yellow-500 text-xl" />
+            ) : (
+              <FaSun className="text-yellow-500 dark:text-gray-200 text-xl" />
+            )}
+          </button>
+        </div>
+      }
       <NavLink onClick={toggleMenuDropdown} to="/">
         <span>Home</span>
       </NavLink>
@@ -111,7 +125,7 @@ const NavBar = () => {
           {isProfileOpen && (
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] w-fit min-w-40 mt-12 mr-10 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] w-fit min-w-40 mt-4 mr-10 p-2 shadow"
             >
               <li className="block">
                 <img
@@ -155,7 +169,7 @@ const NavBar = () => {
           </Link>
         )}
       </div>
-      <div className="">
+      <div className="hidden sm:flex">
         <button
           onClick={toggleTheme}
           className="p-2 bg-white shadow-lg rounded-full"
