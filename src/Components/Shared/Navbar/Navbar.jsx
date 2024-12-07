@@ -144,7 +144,7 @@ const NavBar = () => {
                   {user.displayName}
                 </h3>
               </li>
-              <li className="font-semibold hover:bg-gradient-to-t hover:from-green-200 hover:to-green-100">
+              <li className="font-semibold text-red-600 text-lg hover:bg-gradient-to-t hover:from-green-200 hover:to-green-100">
                 <Link onClick={showSignOutModal}>Logout</Link>
               </li>
             </ul>
