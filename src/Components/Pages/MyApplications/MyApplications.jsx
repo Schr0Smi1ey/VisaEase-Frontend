@@ -12,10 +12,12 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import "aos/dist/aos.css";
 import Aos from "aos";
+import { HashLoader } from "react-spinners";
 
 const MyVisaApplications = () => {
   const { user, Toast, theme } = useContext(AuthContext);
   const [applications, setApplications] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     window.scrollTo(0, 0);
     Aos.init({ duration: 500 });
@@ -29,7 +31,8 @@ const MyVisaApplications = () => {
         );
         setApplications(userApplications);
       })
-      .catch((error) => Toast(error.message, "error"));
+      .catch((error) => Toast(error.message, "error"))
+      .finally(() => setLoading(false));
   }, [user.email]);
 
   const handleCancel = (applicationId) => {
@@ -78,107 +81,115 @@ const MyVisaApplications = () => {
       >
         My Visa Applications
       </h1>
-      {applications.length === 0 ? (
-        <p className="text-5xl text-center font-bold text-red-500 mt-5">
-          You have not applied for any visas yet.
-        </p>
+      {loading ? (
+        <div className="flex items-center justify-center h-screen">
+          <HashLoader color="#387478" size={110} />
+        </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 xl:gap-6">
-          {applications.map((application) => (
-            <div
-              key={application._id}
-              className={`${
-                theme == "dark" ? "bg-gray-950" : "bg-white"
-              } p-2 rounded-lg shadow-lg text-lg flex flex-col`}
-            >
-              <img
-                data-aos="fade-up"
-                src={application.countryImage}
-                alt={application.country}
-                className="w-full border-2 border-e-gray-100 object-cover rounded-lg mb-4"
-              />
-              <div data-aos="fade-up" className="flex-grow">
-                <h3 className="font-bold text-xl mb-2">
-                  {application.countryName}
-                </h3>
-                <p
-                  className={`flex flex-wrap items-center gap-2 ${
-                    theme == "dark" ? "text-white" : "text-gray-700"
-                  }`}
+        <div>
+          {applications.length === 0 ? (
+            <p className="text-5xl text-center font-bold text-red-500 mt-5">
+              You have not applied for any visas yet.
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 xl:gap-6">
+              {applications.map((application) => (
+                <div
+                  key={application._id}
+                  className={`${
+                    theme == "dark" ? "bg-gray-950" : "bg-white"
+                  } p-2 rounded-lg shadow-lg text-lg flex flex-col`}
                 >
-                  <FiType className="text-green-500 text-xl" />
-                  <strong>Visa Type:</strong> {application.visaType}
-                </p>
-                <p
-                  className={`flex flex-wrap items-center gap-2 ${
-                    theme == "dark" ? "text-white" : "text-gray-700"
-                  }`}
-                >
-                  <BiTimeFive className="inline-block text-blue-500 text-xl" />
-                  <strong> Processing Time:</strong>{" "}
-                  {application.processingTime}
-                </p>
-                <p
-                  className={`flex flex-wrap items-center gap-2 ${
-                    theme == "dark" ? "text-white" : "text-gray-700"
-                  }`}
-                >
-                  <RiMoneyDollarCircleLine className="inline-block text-green-600 text-xl" />
-                  <strong> Fee:</strong> ${application.fee}
-                </p>
-                <p
-                  className={`flex flex-wrap items-center gap-2 ${
-                    theme == "dark" ? "text-white" : "text-gray-700"
-                  }`}
-                >
-                  <BsCalendarCheck className="inline-block text-purple-500 text-xl" />
-                  <strong> Validity:</strong> {application.validity}
-                </p>
-                <p
-                  className={`flex flex-wrap items-center gap-2 ${
-                    theme == "dark" ? "text-white" : "text-gray-700"
-                  }`}
-                >
-                  <FaClipboardList className="inline-block text-teal-500 text-xl" />
-                  <strong> Application Method:</strong>{" "}
-                  {application.applicationMethod}
-                </p>
-                <p
-                  className={`flex flex-wrap items-center gap-2 ${
-                    theme == "dark" ? "text-white" : "text-gray-700"
-                  }`}
-                >
-                  <BsCalendar className="inline text-purple-500 text-xl" />
-                  <strong> Applied Date:</strong>{" "}
-                  {new Date(application.appliedDate).toLocaleDateString()}
-                </p>
-                <p
-                  className={`flex flex-wrap items-center gap-2 ${
-                    theme == "dark" ? "text-white" : "text-gray-700"
-                  }`}
-                >
-                  <FaUserAlt className="inline-block text-orange-500 text-xl" />
-                  <strong> Applicant's Name:</strong>{" "}
-                  {`${application.firstName} ${application.lastName}`}
-                </p>
-                <p
-                  className={`flex flex-wrap items-center gap-2 ${
-                    theme == "dark" ? "text-white" : "text-gray-700"
-                  }`}
-                >
-                  <HiOutlineMail className="inline-block text-teal-500 text-xl" />
-                  <strong> Applicant's Email:</strong> {application.email}
-                </p>
-              </div>
-              <button
-                data-aos="fade-up"
-                onClick={() => handleCancel(application._id)}
-                className="px-3 py-1 bg-red-500 rounded-lg text-white font-semibold mt-4"
-              >
-                Cancel
-              </button>
+                  <img
+                    data-aos="fade-up"
+                    src={application.countryImage}
+                    alt={application.country}
+                    className="w-full border-2 border-e-gray-100 object-cover rounded-lg mb-4"
+                  />
+                  <div data-aos="fade-up" className="flex-grow">
+                    <h3 className="font-bold text-xl mb-2">
+                      {application.countryName}
+                    </h3>
+                    <p
+                      className={`flex flex-wrap items-center gap-2 ${
+                        theme == "dark" ? "text-white" : "text-gray-700"
+                      }`}
+                    >
+                      <FiType className="text-green-500 text-xl" />
+                      <strong>Visa Type:</strong> {application.visaType}
+                    </p>
+                    <p
+                      className={`flex flex-wrap items-center gap-2 ${
+                        theme == "dark" ? "text-white" : "text-gray-700"
+                      }`}
+                    >
+                      <BiTimeFive className="inline-block text-blue-500 text-xl" />
+                      <strong> Processing Time:</strong>{" "}
+                      {application.processingTime}
+                    </p>
+                    <p
+                      className={`flex flex-wrap items-center gap-2 ${
+                        theme == "dark" ? "text-white" : "text-gray-700"
+                      }`}
+                    >
+                      <RiMoneyDollarCircleLine className="inline-block text-green-600 text-xl" />
+                      <strong> Fee:</strong> ${application.fee}
+                    </p>
+                    <p
+                      className={`flex flex-wrap items-center gap-2 ${
+                        theme == "dark" ? "text-white" : "text-gray-700"
+                      }`}
+                    >
+                      <BsCalendarCheck className="inline-block text-purple-500 text-xl" />
+                      <strong> Validity:</strong> {application.validity}
+                    </p>
+                    <p
+                      className={`flex flex-wrap items-center gap-2 ${
+                        theme == "dark" ? "text-white" : "text-gray-700"
+                      }`}
+                    >
+                      <FaClipboardList className="inline-block text-teal-500 text-xl" />
+                      <strong> Application Method:</strong>{" "}
+                      {application.applicationMethod}
+                    </p>
+                    <p
+                      className={`flex flex-wrap items-center gap-2 ${
+                        theme == "dark" ? "text-white" : "text-gray-700"
+                      }`}
+                    >
+                      <BsCalendar className="inline text-purple-500 text-xl" />
+                      <strong> Applied Date:</strong>{" "}
+                      {new Date(application.appliedDate).toLocaleDateString()}
+                    </p>
+                    <p
+                      className={`flex flex-wrap items-center gap-2 ${
+                        theme == "dark" ? "text-white" : "text-gray-700"
+                      }`}
+                    >
+                      <FaUserAlt className="inline-block text-orange-500 text-xl" />
+                      <strong> Applicant's Name:</strong>{" "}
+                      {`${application.firstName} ${application.lastName}`}
+                    </p>
+                    <p
+                      className={`flex flex-wrap items-center gap-2 ${
+                        theme == "dark" ? "text-white" : "text-gray-700"
+                      }`}
+                    >
+                      <HiOutlineMail className="inline-block text-teal-500 text-xl" />
+                      <strong> Applicant's Email:</strong> {application.email}
+                    </p>
+                  </div>
+                  <button
+                    data-aos="fade-up"
+                    onClick={() => handleCancel(application._id)}
+                    className="px-3 py-1 bg-red-500 rounded-lg text-white font-semibold mt-4"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
       )}
     </div>

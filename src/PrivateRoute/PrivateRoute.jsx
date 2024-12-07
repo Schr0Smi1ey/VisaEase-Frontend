@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Contexts/AuthContext/AuthProvider";
-import { ScaleLoader } from "react-spinners";
+import { HashLoader } from "react-spinners";
 import { Navigate, useLocation } from "react-router-dom";
 
 const PrivateRoute = ({ children }) => {
@@ -20,7 +20,7 @@ const PrivateRoute = ({ children }) => {
   if (loading || (!user && !isRedirecting)) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <ScaleLoader color="#387478" height={100} width={8} />
+        <HashLoader color="#387478" size={110} />
       </div>
     );
   }

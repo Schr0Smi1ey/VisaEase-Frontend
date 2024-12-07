@@ -2,11 +2,13 @@ import { useState, useEffect, useContext } from "react";
 import VisaCard from "../../Cards/VisaCard";
 import { Helmet } from "react-helmet";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
+import { HashLoader } from "react-spinners";
 
 const AllVisa = () => {
   const [visas, setVisas] = useState([]);
   const [filteredVisas, setFilteredVisas] = useState([]);
   const [filter, setFilter] = useState("All");
+  const [loading, setLoading] = useState(true);
   const { theme, Toast } = useContext(AuthContext);
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -16,7 +18,8 @@ const AllVisa = () => {
         setVisas(data);
         setFilteredVisas(data);
       })
-      .catch((error) => Toast(error.message, "error"));
+      .catch((error) => Toast(error.message, "error"))
+      .finally(() => setLoading(false));
   }, []);
 
   const handleFilterChange = (e) => {
@@ -58,17 +61,24 @@ const AllVisa = () => {
           <option value="Official Visa">Official Visa</option>
         </select>
       </div>
-
-      {filteredVisas.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredVisas.map((visa) => (
-            <VisaCard key={visa._id} visa={visa} />
-          ))}
+      {loading ? (
+        <div className="flex items-center justify-center min-h-screen">
+          <HashLoader color="#387478" size={110} />
         </div>
       ) : (
-        <p className="text-5xl text-center font-bold text-red-500 mt-5">
-          No visas available.
-        </p>
+        <div>
+          {filteredVisas.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filteredVisas.map((visa) => (
+                <VisaCard key={visa._id} visa={visa} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-5xl text-center font-bold text-red-500 mt-5">
+              No visas available.
+            </p>
+          )}
+        </div>
       )}
     </div>
   );
