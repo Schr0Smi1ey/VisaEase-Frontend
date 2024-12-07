@@ -3,6 +3,8 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
 import { FaSun, FaMoon } from "react-icons/fa";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 const NavBar = () => {
   const { user, signOutUser, Toast, setLoading } = useContext(AuthContext);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -37,7 +39,6 @@ const NavBar = () => {
   };
   const toggleProfileDropdown = () => {
     if (window.innerWidth <= 640) {
-      navigate("/profile");
       setIsMenuOpen(false);
       return;
     }
@@ -67,6 +68,20 @@ const NavBar = () => {
   };
   const navElements = (
     <ul className="flex flex-col text-center lg:flex-row items-center justify-center gap-2 sm:gap-5 font-medium text-lg">
+      {
+        <div className="flex sm:hidden">
+          <button
+            onClick={toggleTheme}
+            className="p-2 bg-gray-200 dark:bg-gray-800 rounded-full"
+          >
+            {theme == "light" ? (
+              <FaMoon className="text-gray-800 dark:text-yellow-500 text-xl" />
+            ) : (
+              <FaSun className="text-yellow-500 dark:text-gray-200 text-xl" />
+            )}
+          </button>
+        </div>
+      }
       <NavLink onClick={toggleMenuDropdown} to="/">
         <span>Home</span>
       </NavLink>
@@ -124,11 +139,6 @@ const NavBar = () => {
                 </h3>
               </li>
               <li className="font-semibold hover:bg-gradient-to-t hover:from-green-200 hover:to-green-100">
-                <Link onClick={toggleProfileDropdown} to="/profile">
-                  Profile
-                </Link>
-              </li>
-              <li className="font-semibold hover:bg-gradient-to-t hover:from-green-200 hover:to-green-100">
                 <Link onClick={showSignOutModal}>Logout</Link>
               </li>
             </ul>
@@ -158,15 +168,35 @@ const NavBar = () => {
           </Link>
         )}
       </div>
-      <div>
+      <div className="hidden sm:flex">
         <button
           onClick={toggleTheme}
           className="p-2 bg-gray-200 dark:bg-gray-800 rounded-full"
         >
-          {theme == "light" ? (
-            <FaMoon className="text-gray-800 dark:text-yellow-500 text-xl" />
+          {theme === "light" ? (
+            <>
+              <FaMoon
+                data-tooltip-id="theme-tooltip"
+                data-tooltip-content="Switch to dark mode"
+                data-tooltip-place="bottom"
+                data-tooltip-offset={20}
+                data-tooltip-variant="info"
+                className="text-gray-800 z-[100] dark:text-yellow-500 text-xl"
+              />
+              <Tooltip id="theme-tooltip" className="z-[110]" />
+            </>
           ) : (
-            <FaSun className="text-yellow-500 dark:text-gray-200 text-xl" />
+            <>
+              <FaSun
+                data-tooltip-id="theme-tooltip"
+                data-tooltip-content="Switch to light mode"
+                data-tooltip-place="bottom"
+                data-tooltip-offset={20}
+                data-tooltip-variant="info"
+                className="text-yellow-500 dark:text-gray-200 text-xl"
+              />
+              <Tooltip id="theme-tooltip" className="z-[110]" />
+            </>
           )}
         </button>
       </div>

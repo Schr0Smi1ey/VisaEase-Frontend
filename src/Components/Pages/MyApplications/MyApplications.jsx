@@ -7,6 +7,7 @@ import { BsCalendarCheck } from "react-icons/bs";
 import { BsCalendar } from "react-icons/bs";
 import { HiOutlineMail } from "react-icons/hi";
 import { FaUserAlt, FaClipboardList } from "react-icons/fa";
+import { Helmet } from "react-helmet";
 
 const MyVisaApplications = () => {
   const { user, Toast } = useContext(AuthContext);
@@ -48,19 +49,22 @@ const MyVisaApplications = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <Helmet>
+        <title>VisaEase | My-Applications</title>
+      </Helmet>
       <h1 className="text-3xl text-center font-bold mb-6 text-primary">
         My Visa Applications
       </h1>
       {applications.length === 0 ? (
-        <p className="text-lg text-gray-600">
+        <p className="text-5xl text-center font-bold text-red-500 mt-5">
           You have not applied for any visas yet.
         </p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 xl:gap-6">
           {applications.map((application) => (
             <div
               key={application._id}
-              className="bg-white p-4 rounded-lg shadow-lg text-lg"
+              className="bg-white p-2 rounded-lg shadow-lg text-lg"
             >
               <img
                 src={application.countryImage}
@@ -70,39 +74,39 @@ const MyVisaApplications = () => {
               <h3 className="font-bold text-xl mb-2">
                 {application.countryName}
               </h3>
-              <p className="flex items-center gap-4 text-gray-700">
+              <p className="flex flex-wrap items-center gap-2 text-gray-700">
                 <FiType className="text-green-500 text-xl" />
                 <strong className="text-gray-900">Visa Type:</strong>{" "}
                 {application.visaType}
               </p>
-              <p className="flex items-center gap-4 text-gray-700">
+              <p className="flex flex-wrap items-center gap-2 text-gray-700">
                 <BiTimeFive className="inline-block text-blue-500 text-xl" />
                 <strong> Processing Time:</strong> {application.processingTime}
               </p>
-              <p className="flex items-center gap-4 text-gray-700">
+              <p className="flex flex-wrap items-center gap-2 text-gray-700">
                 <RiMoneyDollarCircleLine className="inline-block text-green-600 text-xl" />
                 <strong> Fee:</strong> ${application.fee}
               </p>
-              <p className="flex items-center gap-4 text-gray-700">
+              <p className="flex flex-wrap items-center gap-2 text-gray-700">
                 <BsCalendarCheck className="inline-block text-purple-500 text-xl" />
                 <strong> Validity:</strong> {application.validity}
               </p>
-              <p className="flex items-center gap-4 text-gray-700">
+              <p className="flex flex-wrap items-center gap-2 text-gray-700">
                 <FaClipboardList className="inline-block text-teal-500 text-xl" />
                 <strong> Application Method:</strong>{" "}
                 {application.applicationMethod}
               </p>
-              <p className="flex items-center gap-4 text-gray-700">
+              <p className="flex flex-wrap items-center gap-2 text-gray-700">
                 <BsCalendar className="inline text-purple-500 text-xl" />
                 <strong> Applied Date:</strong>{" "}
                 {new Date(application.appliedDate).toLocaleDateString()}
               </p>
-              <p className="flex items-center gap-4 text-gray-700">
+              <p className="flex flex-wrap items-center gap-2 text-gray-700">
                 <FaUserAlt className="inline-block text-orange-500 text-xl" />
                 <strong> Applicant's Name:</strong>{" "}
                 {`${application.firstName} ${application.lastName}`}
               </p>
-              <p className="flex items-center gap-4 text-gray-700">
+              <p className="flex flex-wrap items-center gap-2 text-gray-700">
                 <HiOutlineMail className="inline-block text-teal-500 text-xl" />
                 <strong> Applicant's Email:</strong> {application.email}
               </p>

@@ -5,6 +5,7 @@ import { FaClipboardList } from "react-icons/fa";
 import { BiTimeFive } from "react-icons/bi";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { BsCalendarCheck } from "react-icons/bs";
+import { Helmet } from "react-helmet";
 
 const MyAddedVisas = () => {
   const { user, Toast } = useContext(AuthContext);
@@ -153,28 +154,28 @@ const MyAddedVisas = () => {
               className="border-2 border-gray-100 mx-auto object-cover rounded-lg mb-4"
             />
             <h3 className="font-bold text-xl mb-2">{visa.countryName}</h3>
-            <p className="flex items-center gap-4 text-gray-700">
+            <p className="flex flex-wrap items-center gap-2 text-gray-700">
               <FiType className="text-green-500 text-xl" />
               <strong className="text-gray-900">Visa Type:</strong>{" "}
               {visa.visaType}
             </p>
-            <p className="flex items-center gap-4 text-gray-700 border-2 border-red-500">
+            <p className="flex flex-wrap items-center gap-2 text-gray-700 border-2 border-red-500">
               <BiTimeFive className="text-blue-500 text-xl" />
               <strong className="text-gray-900 inline-block">
                 Processing Time:
               </strong>{" "}
               {visa.processingTime}
             </p>
-            <p className="flex items-center gap-4 text-gray-700">
+            <p className="flex flex-wrap items-center gap-2 text-gray-700">
               <RiMoneyDollarCircleLine className="text-green-600 text-xl" />
               <strong className="text-gray-900">Fee:</strong> ${visa.fee}
             </p>
-            <p className="flex items-center gap-4 text-gray-700">
+            <p className="flex flex-wrap items-center gap-2 text-gray-700">
               <BsCalendarCheck className="text-purple-500 text-xl" />
               <strong className="text-gray-900">Validity:</strong>{" "}
               {visa.validity}
             </p>
-            <p className="flex items-center gap-4 text-gray-700">
+            <p className="flex flex-wrap items-center gap-2 text-gray-700">
               <FaClipboardList className="text-teal-500 text-xl" />
               <strong className="text-gray-900">
                 Application Method:
@@ -198,12 +199,14 @@ const MyAddedVisas = () => {
           </div>
         ))}
       </div> */}
+      <Helmet>
+        <title>VisaEase | My-Visa </title>
+      </Helmet>
       <h1 className="text-3xl text-center font-bold mb-6 text-primary">
         My Added Visas
       </h1>
-
       {/* Search Bar */}
-      <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
+      <div className="flex flex-col md:flex-row items-center gap-2 mb-6">
         <input
           type="text"
           value={searchTerm}
@@ -211,7 +214,7 @@ const MyAddedVisas = () => {
           placeholder="Search by country name"
           className="input input-bordered w-full md:w-1/2"
         />
-        <div className="flex gap-4">
+        <div className="flex gap-2">
           <button onClick={handleSearch} className="btn btn-primary px-4 py-2">
             Search
           </button>
@@ -220,14 +223,17 @@ const MyAddedVisas = () => {
           </button>
         </div>
       </div>
-
       {/* Visa Cards */}
-      {(filteredVisas.length === 0 && (
+      {visas.length === 0 ? (
+        <p className="text-5xl text-center font-bold text-red-500 mt-5">
+          You have not added any visas yet.
+        </p>
+      ) : filteredVisas.length === 0 ? (
         <p className="text-5xl text-center font-bold text-red-500 mt-5">
           No visas found for this country.
         </p>
-      )) || (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {filteredVisas.map((visa) => (
             <div
               key={visa._id}
@@ -239,28 +245,28 @@ const MyAddedVisas = () => {
                 className="border-2 border-gray-100 mx-auto object-cover rounded-lg mb-4"
               />
               <h3 className="font-bold text-xl mb-2">{visa.countryName}</h3>
-              <p className="flex items-center gap-4 text-gray-700">
+              <p className="flex flex-wrap items-center gap-2 text-gray-700">
                 <FiType className="text-green-500 text-xl" />
                 <strong className="text-gray-900">Visa Type:</strong>{" "}
                 {visa.visaType}
               </p>
-              <p className="flex items-center gap-4 text-gray-700">
+              <p className="flex flex-wrap items-center gap-2 text-gray-700">
                 <BiTimeFive className="text-blue-500 text-xl" />
                 <strong className="text-gray-900 inline-block">
                   Processing Time:
                 </strong>{" "}
                 {visa.processingTime}
               </p>
-              <p className="flex items-center gap-4 text-gray-700">
+              <p className="flex flex-wrap items-center gap-2 text-gray-700">
                 <RiMoneyDollarCircleLine className="text-green-600 text-xl" />
                 <strong className="text-gray-900">Fee:</strong> ${visa.fee}
               </p>
-              <p className="flex items-center gap-4 text-gray-700">
+              <p className="flex flex-wrap items-center gap-2 text-gray-700">
                 <BsCalendarCheck className="text-purple-500 text-xl" />
                 <strong className="text-gray-900">Validity:</strong>{" "}
                 {visa.validity}
               </p>
-              <p className="flex items-center gap-4 text-gray-700">
+              <p className="flex flex-wrap items-center gap-2 text-gray-700">
                 <FaClipboardList className="text-teal-500 text-xl" />
                 <strong className="text-gray-900">
                   Application Method:
@@ -355,9 +361,9 @@ const MyAddedVisas = () => {
                 <label className="block text-lg font-semibold mb-2">
                   Required Documents
                 </label>
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-2">
                   {/* Checkbox for Valid Passport */}
-                  <label className="flex items-center gap-2">
+                  <label className="flex flex-wrap items-center gap-2">
                     <input
                       type="checkbox"
                       name="requiredDocuments"
@@ -371,7 +377,7 @@ const MyAddedVisas = () => {
                     Valid Passport
                   </label>
                   {/* Checkbox for Visa Application Form */}
-                  <label className="flex items-center gap-2">
+                  <label className="flex flex-wrap items-center gap-2">
                     <input
                       type="checkbox"
                       name="requiredDocuments"
@@ -385,7 +391,7 @@ const MyAddedVisas = () => {
                     Visa Application Form
                   </label>
                   {/* Checkbox for Recent Passport-Sized Photograph */}
-                  <label className="flex items-center gap-2">
+                  <label className="flex flex-wrap items-center gap-2">
                     <input
                       type="checkbox"
                       name="requiredDocuments"

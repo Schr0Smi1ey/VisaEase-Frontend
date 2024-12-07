@@ -9,10 +9,10 @@ import { FaBirthdayCake } from "react-icons/fa";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { BsCalendarCheck } from "react-icons/bs";
 import { HiOutlineMail } from "react-icons/hi";
+import { Helmet } from "react-helmet";
 const VisaDetails = () => {
   const visaData = useLoaderData();
   const { user, Toast } = useContext(AuthContext);
-  console.log(visaData);
   const [visa, setVisa] = useState(visaData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -35,6 +35,7 @@ const VisaDetails = () => {
     const { _id, ...visaWithoutId } = visa;
     const applicationData = {
       ...formData,
+      visaId: _id,
       ...visaWithoutId,
     };
     fetch("http://localhost:5000/Applications", {
@@ -43,20 +44,29 @@ const VisaDetails = () => {
       body: JSON.stringify(applicationData),
     })
       .then((res) => {
+        console.log(res);
         if (res.ok) {
           Toast("Application submitted successfully", "success");
           setIsModalOpen(false);
         } else {
-          Toast("Failed to submit application", "error");
+          if (res.status === 400) {
+            Toast("Application already exists", "error");
+          } else {
+            Toast("Failed to submit application", "error");
+          }
         }
       })
       .catch((error) => {
+        console.log(error);
         Toast(error.message, "error");
       });
   };
 
   return (
     <div className="container mx-auto max-w-3xl px-4 py-8">
+      <Helmet>
+        <title>VisaEase | Visa-Details | {visa._id}</title>
+      </Helmet>
       <h1 className="text-3xl text-center font-bold mb-6 text-primary">
         {visa.countryName} Visa Details
       </h1>

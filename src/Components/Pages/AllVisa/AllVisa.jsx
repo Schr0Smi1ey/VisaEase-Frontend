@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import VisaCard from "../../Cards/VisaCard";
+import { Helmet } from "react-helmet";
 
 const AllVisa = () => {
   const [visas, setVisas] = useState([]);
@@ -34,16 +35,19 @@ const AllVisa = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <Helmet>
+        <title>VisaEase | All-Visa</title>
+      </Helmet>
       <h1 className="text-3xl font-bold text-center mb-4 text-primary">
         All Visas
       </h1>
 
       {/* Filter Dropdown */}
-      <div className="flex justify-center mb-8">
+      <div className="flex justify-center mb-8 w-fit mx-auto">
         <select
           value={filter}
           onChange={handleFilterChange}
-          className="select select-bordered font-medium text-lg w-fit mx-auto"
+          className="select select-bordered w-fit mx-auto"
         >
           <option value="All">All Visa Types</option>
           <option value="Tourist Visa">Tourist Visa</option>
@@ -55,7 +59,7 @@ const AllVisa = () => {
       {filteredVisas.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredVisas.map((visa) => (
-            <VisaCard key={visa.id} visa={visa} />
+            <VisaCard key={visa._id} visa={visa} />
           ))}
         </div>
       ) : (

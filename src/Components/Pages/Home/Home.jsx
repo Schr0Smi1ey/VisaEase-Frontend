@@ -3,6 +3,8 @@ import Banner from "./Banner/Banner";
 import LatestVisa from "./LatestVisa/LatestVisa";
 import BestDestinations from "./BestDestinations/BestDestinations";
 import Airlines from "./Airlines/Airlines";
+import { Helmet } from "react-helmet";
+import Test from "./Test/Test";
 // import Test from "./Test/Test";
 
 const Home = () => {
@@ -12,8 +14,11 @@ const Home = () => {
 
   return (
     <div className="container mx-auto">
-      <Banner></Banner>
+      <Helmet>
+        <title>VisaEase | Home</title>
+      </Helmet>
       {/* <Test></Test> */}
+      <Banner></Banner>
       <LatestVisa></LatestVisa>
       <BestDestinations></BestDestinations>
       <Airlines></Airlines>

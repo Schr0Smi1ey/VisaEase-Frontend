@@ -1,6 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
+import { Helmet } from "react-helmet";
 
 const AddVisa = () => {
   const [visaData, setVisaData] = useState({
@@ -61,9 +62,14 @@ const AddVisa = () => {
       })
       .catch(() => toast.error("Error adding visa. Please try again."));
   };
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="container mx-auto px-4 py-8">
+      <Helmet>
+        <title>VisaEase | Add-Visa</title>
+      </Helmet>
       <h1 className="text-3xl font-bold text-center mb-8 text-primary">
         Add Visa
       </h1>
@@ -109,7 +115,7 @@ const AddVisa = () => {
           />
         </div>
 
-        <div className="mb-4">
+        <div className="mb-4 w-full">
           <label
             className="block text-lg font-semibold mb-2"
             htmlFor="visaType"
@@ -121,7 +127,7 @@ const AddVisa = () => {
             name="visaType"
             value={visaData.visaType}
             onChange={handleInputChange}
-            className="select select-bordered w-full"
+            className="select select-bordered"
             required
           >
             <option value="" disabled="true">
@@ -161,11 +167,11 @@ const AddVisa = () => {
               <input
                 type="checkbox"
                 name="requiredDocuments"
-                value="Valid passport"
+                value="Passport"
                 onChange={handleInputChange}
                 className="checkbox"
               />
-              Valid Passport
+              Passport
             </label>
             <label className="flex items-center gap-2">
               <input
@@ -181,11 +187,11 @@ const AddVisa = () => {
               <input
                 type="checkbox"
                 name="requiredDocuments"
-                value="Recent passport-sized photograph"
+                value="Recent passport-sized photo"
                 onChange={handleInputChange}
                 className="checkbox"
               />
-              Recent Passport-Sized Photograph
+              Recent Passport-Sized Photo
             </label>
           </div>
         </div>

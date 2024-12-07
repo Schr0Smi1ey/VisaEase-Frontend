@@ -34,7 +34,10 @@ const Footer = () => {
         {/* Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 text-gray-600">
           {/* Column 1: Navigation */}
-          <div data-aos="fade-up" className="flex flex-col gap-2">
+          <div
+            data-aos="fade-up"
+            className="flex mx-auto items-center md:items-start flex-col gap-2"
+          >
             <h2 className="mb-3 font-bold text-xl text-black">Navigation</h2>
             <Link className="hover:text-primary hover:font-semibold" to="/home">
               Home
@@ -60,7 +63,10 @@ const Footer = () => {
           </div>
 
           {/* Column 2: Company */}
-          <div data-aos="fade-up" className="flex flex-col gap-2">
+          <div
+            data-aos="fade-up"
+            className="flex flex-col mx-auto items-center md:items-start gap-2"
+          >
             <h2 className="mb-3 font-bold text-xl text-black">Company</h2>
             <Link
               className="hover:text-primary hover:font-semibold"
@@ -89,7 +95,10 @@ const Footer = () => {
           </div>
 
           {/* Column 3: Resources */}
-          <div data-aos="fade-up" className="flex flex-col gap-2">
+          <div
+            data-aos="fade-up"
+            className="flex flex-col mx-auto items-center md:items-start gap-2"
+          >
             <h2 className="mb-3 font-bold text-xl text-black">Resources</h2>
             <Link className="hover:text-primary hover:font-semibold" to="/faq">
               FAQs
@@ -112,7 +121,10 @@ const Footer = () => {
           </div>
 
           {/* Column 4: Follow Us */}
-          <div data-aos="fade-up" className="flex flex-col gap-2">
+          <div
+            data-aos="fade-up"
+            className="flex flex-col mx-auto items-center md:items-start gap-2"
+          >
             <h2 className="mb-3 font-bold text-xl text-black">Follow Us</h2>
             <div className="flex gap-4">
               <a

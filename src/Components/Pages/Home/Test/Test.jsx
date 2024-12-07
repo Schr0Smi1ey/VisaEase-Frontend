@@ -1,13 +1,38 @@
-// import React from "react";
-// import { Lottie } from "lottie-react";
-// import animationData from "../../../../assets/animation.json";
+import React from "react";
+import { Typewriter } from "react-simple-typewriter";
 
-// const Test = () => {
-//   return (
-//     <div>
-//       <Lottie animationData={animationData} loop={true} />
-//     </div>
-//   );
-// };
+const MyComponent = () => {
+  const handleType = (count) => {
+    // access word count number
+    console.log(count);
+  };
 
-// export default Test;
+  const handleDone = () => {
+    console.log(`Done after 5 loops!`);
+  };
+
+  return (
+    <div className="App">
+      <h1
+        style={{ paddingTop: "5rem", margin: "auto 0", fontWeight: "normal" }}
+      >
+        Life is simple{" "}
+        <span style={{ color: "red", fontWeight: "bold" }}>
+          {/* Style will be inherited from the parent element */}
+          <Typewriter
+            words={["Hassle-Free Visa Assistance"]}
+            loop={1}
+            cursor
+            cursorStyle="_"
+            typeSpeed={70}
+            deleteSpeed={50}
+            delaySpeed={1000}
+            onLoopDone={handleDone}
+            onType={handleType}
+          />
+        </span>
+      </h1>
+    </div>
+  );
+};
+export default MyComponent;

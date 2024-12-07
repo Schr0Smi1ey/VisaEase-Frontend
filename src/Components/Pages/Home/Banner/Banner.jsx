@@ -15,6 +15,7 @@ import {
   Roll,
   Slide,
 } from "react-awesome-reveal";
+import { Typewriter } from "react-simple-typewriter";
 
 const Banner = () => {
   const sliderContent = [
@@ -64,6 +65,11 @@ const Banner = () => {
   };
   const { id, title, description, buttonText, imgSrc } =
     sliderContent[currentSlide];
+  const handleType = (count) => {
+    // access word count number
+    console.log(count);
+  };
+
   return (
     <section className="md:container mx-auto my-5">
       <div className="carousel w-full">
@@ -87,11 +93,23 @@ const Banner = () => {
                 />
               </div>
               <div className="w-4/6 mb-4 md:ml-4 lg:ml-6">
-                <h1
-                  className="font-bold text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-5"
-                  data-aos="fade-left"
-                >
-                  <Slide direction="right">{title}</Slide>
+                <h1 data-aos="fade-left">
+                  <Slide direction="right">
+                    <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-5">
+                      {/* Style will be inherited from the parent element */}
+                      <Typewriter
+                        words={[title]}
+                        loop={1}
+                        cursor
+                        cursorStyle=""
+                        typeSpeed={70}
+                        deleteSpeed={50}
+                        delaySpeed={1000}
+                        // onLoopDone={handleDone}
+                        onType={handleType}
+                      />
+                    </h1>
+                  </Slide>
                 </h1>
                 <p
                   className="font-normal text-base text-gray-800 mb-6"

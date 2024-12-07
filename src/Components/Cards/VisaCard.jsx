@@ -1,8 +1,19 @@
 import { Link } from "react-router-dom";
-
+import { FiType } from "react-icons/fi";
+import { BiTimeFive } from "react-icons/bi";
+import { RiMoneyDollarCircleLine } from "react-icons/ri";
+import { BsCalendarCheck } from "react-icons/bs";
+import { FaClipboardList } from "react-icons/fa";
 const VisaCard = ({ visa }) => {
-  const { countryImage, countryName, visaType, fee, validity } = visa;
-  console.log(visa._id);
+  const {
+    countryImage,
+    countryName,
+    visaType,
+    fee,
+    validity,
+    processingTime,
+    applicationMethod,
+  } = visa;
   return (
     <div className="card shadow-lg rounded-lg border border-gray-200">
       <img
@@ -14,16 +25,29 @@ const VisaCard = ({ visa }) => {
         <h2 className="text-xl font-semibold text-primary mb-2">
           {countryName}
         </h2>
-        <p className="text-sm text-gray-600 mb-2">
-          <span className="font-medium">Visa Type:</span> {visaType}
-        </p>
-        <p className="text-sm text-gray-600 mb-2">
-          <span className="font-medium">Fee:</span> ${fee}
-        </p>
-        <p className="text-sm text-gray-600 mb-4">
-          <span className="font-medium">Validity:</span> {validity}
-        </p>
-        <div className="flex-grow-1">
+        <div className="flex-grow mt-3">
+          <p className="flex items-center gap-2 text-gray-700">
+            <FiType className="text-green-500 text-xl" />
+            <strong className="text-gray-900">Visa Type:</strong> {visaType}
+          </p>
+          <p className="flex items-center gap-2 text-gray-700">
+            <BiTimeFive className="inline-block text-blue-500 text-xl" />
+            <strong> Processing Time:</strong> {processingTime}
+          </p>
+          <p className="flex items-center gap-2 text-gray-700">
+            <RiMoneyDollarCircleLine className="inline-block text-green-600 text-xl" />
+            <strong> Fee:</strong> ${fee}
+          </p>
+          <p className="flex items-center gap-2 text-gray-700">
+            <BsCalendarCheck className="inline-block text-purple-500 text-xl" />
+            <strong> Validity:</strong> {validity}
+          </p>
+          <p className="flex flex-wrap items-center gap-2 text-gray-700">
+            <FaClipboardList className="inline-block text-teal-500 text-xl" />
+            <strong> Application Method:</strong> {applicationMethod}
+          </p>
+        </div>
+        <div className="mt-3">
           <Link
             to={`/visa-details/${visa._id}`}
             className="btn btn-primary w-full text-white font-semibold"

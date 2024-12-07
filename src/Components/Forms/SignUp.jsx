@@ -39,7 +39,30 @@ const SignUp = () => {
     setFormData({ ...formData, [name]: value });
     if (name === "password") validatePassword(value);
   };
-
+  const sendToDatabase = async (
+    email,
+    name,
+    photoURL,
+    creationTime,
+    lastSignInTime
+  ) => {
+    console.log(email, name, photoURL, creationTime, lastSignInTime);
+    fetch("http://localhost:5000/Users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        name,
+        photoURL,
+        creationTime,
+        lastSignInTime,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (passwordError) return;
@@ -48,7 +71,17 @@ const SignUp = () => {
     const navigationPath = location.state?.from || "/";
     console.log(email, password, name, photoURL);
     createUser(email, password)
-      .then(() => updateUserProfile(name, photoURL))
+      .then((res) => {
+        console.log(res);
+        updateUserProfile(name, photoURL);
+        sendToDatabase(
+          email,
+          name,
+          photoURL,
+          res.user.metadata.creationTime,
+          res.user.metadata.lastSignInTime
+        );
+      })
       .then(() => {
         console.log("Account Created Successfully");
         Toast("Account Created Successfully", "success");
@@ -63,8 +96,15 @@ const SignUp = () => {
 
   const handleSignInWithGoogle = () => {
     signInWithGoogle()
-      .then(() => {
+      .then((res) => {
         Toast("Login Successful", "success");
+        sendToDatabase(
+          res.user.email,
+          res.user.displayName,
+          res.user.photoURL,
+          res.user.metadata.creationTime,
+          res.user.metadata.lastSignInTime
+        );
         navigate(location.state?.from || "/", { replace: true });
       })
       .catch((error) => Toast(error.message, "error"))
