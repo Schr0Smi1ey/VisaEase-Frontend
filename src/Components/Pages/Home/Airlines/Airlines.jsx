@@ -84,21 +84,21 @@ const Airlines = () => {
         </p>
 
         {/* Airline Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center gap-2 lg:gap-6">
           {airlines.map((airline) => (
             <div
               key={airline.id}
-              className={`flex items-center justify-between ${
+              className={`flex items-center justify-between gap-2 ${
                 theme == "dark" ? "bg-gray-900" : "bg-white"
-              } shadow rounded-lg p-4 hover:shadow-lg transition`}
+              } shadow rounded-lg p-2 py-4 lg:p-4 hover:shadow-lg transition`}
             >
-              <div className="flex items-center">
+              <div className="flex items-center justify-between gap-3">
                 <img
                   src={airline.logo}
                   alt={airline.name}
-                  className="w-16 h-16 mr-4 rounded-full"
+                  className="w-10 h-10 inline-block lg:w-16 lg:h-16 rounded-full"
                 />
-                <span className="font-medium">{airline.name}</span>
+                <span className="inline-block font-medium">{airline.name}</span>
               </div>
               <span className="text-primary text-lg font-bold">›</span>
             </div>

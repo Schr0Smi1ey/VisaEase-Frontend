@@ -156,7 +156,7 @@ const NavBar = () => {
           <Link
             onClick={toggleMenuDropdown}
             to={"/login"}
-            className="bg-white px-2 py-1 rounded-lg text-black font-semibold text-lg"
+            className="bg-white px-2 mb-2 sm:mb-0 py-1 rounded-lg text-black font-semibold text-lg"
           >
             Login
           </Link>
@@ -273,7 +273,7 @@ const NavBar = () => {
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost lg:hidden text-black"
+            className={`btn btn-ghost lg:hidden text-primary`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
