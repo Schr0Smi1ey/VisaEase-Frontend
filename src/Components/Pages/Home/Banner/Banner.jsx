@@ -81,11 +81,10 @@ const Banner = () => {
                   data-aos-duration="800"
                 />
               </div>
-              <div className="w-4/6 mb-4 md:ml-4 lg:ml-6">
+              <div className="w-4/6 mb-4 mt-4 md:mt-0 md:ml-4 lg:ml-6">
                 <h1 data-aos="fade-left">
                   <Slide direction="right">
                     <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-5">
-                      {/* Style will be inherited from the parent element */}
                       <Typewriter
                         words={[title]}
                         loop={1}

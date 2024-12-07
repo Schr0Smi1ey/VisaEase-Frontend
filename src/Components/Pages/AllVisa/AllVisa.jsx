@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from "react";
 import VisaCard from "../../Cards/VisaCard";
 import { Helmet } from "react-helmet";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
-import { toast } from "react-toastify";
 
 const AllVisa = () => {
   const [visas, setVisas] = useState([]);
