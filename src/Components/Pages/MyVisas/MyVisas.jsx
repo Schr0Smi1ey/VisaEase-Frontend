@@ -180,34 +180,41 @@ const MyAddedVisas = () => {
       </Helmet>
       <h1
         data-aos="zoom-in"
-        className="text-3xl text-center font-bold mb-6 text-primary"
+        className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-5 text-primary"
       >
-        My Added Visas
+        My Added Visas 🌍🛂
       </h1>
-      <div className="flex flex-col md:flex-row items-center gap-2 mb-6">
+
+      <p className="text-xl text-center w-[90%] md:w-[70%] lg:w-[50%] mx-auto text-gray-500 mb-6">
+        Manage and view all the visas you’ve added to the platform. Search by
+        country name for easy access.
+      </p>
+
+      <div className="flex flex-col w-[95%] md:w-3/4 lg:w-[60%] mx-auto md:flex-row items-center gap-2 mb-6">
         <input
           data-aos="fade-right"
           type="text"
           value={searchTerm}
           onChange={handleSearchChange}
           placeholder="Search by country name"
-          className="input input-bordered w-full md:w-1/2"
+          className="input flex-grow input-bordered w-full md:w-1/2 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
         />
-        <div data-aos="fade-left" className="flex gap-2">
+        <div data-aos="fade-left" className="flex w-fit gap-2">
           <button
             onClick={handleSearch}
-            className="bg-green-500 font-bold text-lg rounded-lg px-4 py-2"
+            className="bg-green-500 font-bold text-lg text-white rounded-lg px-6 py-3 transition-transform transform hover:scale-105"
           >
             Search
           </button>
           <button
             onClick={resetSearch}
-            className="bg-red-500 font-bold text-lg rounded-lg px-4 py-2"
+            className="bg-red-500 font-bold text-lg text-white rounded-lg px-6 py-3 transition-transform transform hover:scale-105"
           >
             Reset
           </button>
         </div>
       </div>
+
       {loading ? (
         <div className="flex items-center justify-center min-h-screen">
           <HashLoader color="#387478" size={110} />

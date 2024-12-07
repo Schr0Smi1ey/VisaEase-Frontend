@@ -94,10 +94,15 @@ const AddVisa = () => {
       </Helmet>
       <h1
         data-aos="zoom-in"
-        className="text-3xl font-bold text-center mb-8 text-primary"
+        className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4 text-primary"
       >
-        Add Visa
+        Add New Visa 🌍✈️
       </h1>
+
+      <p data-aos="zoom-in" className="text-xl text-center text-gray-500 mb-8">
+        Enter the necessary details to add a new visa and make it available for
+        applicants.
+      </p>
       <form
         onSubmit={handleSubmit}
         className={`${

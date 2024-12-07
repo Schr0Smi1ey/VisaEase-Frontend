@@ -45,15 +45,20 @@ const AllVisa = () => {
       <Helmet>
         <title>VisaEase | All-Visa</title>
       </Helmet>
-      <h1 className="text-3xl font-bold text-center mb-4 text-primary">
-        All Visas
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4 text-primary">
+        Explore All Available Visas 🌍💼
       </h1>
 
-      <div className="flex justify-center mb-8 w-fit mx-auto">
+      <p className="text-xl text-center text-gray-500 mb-8">
+        Browse through various visa types and find the one that suits your
+        travel or study needs.
+      </p>
+
+      <div className="flex justify-center mb-8 w-full md:w-1/4 text-center mx-auto">
         <select
           value={filter}
           onChange={handleFilterChange}
-          className="select select-bordered w-fit mx-auto"
+          className="select select-bordered w-full text-center py-2 px-4 text-lg font-medium border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
         >
           <option value="All">All Visa Types</option>
           <option value="Tourist Visa">Tourist Visa</option>
@@ -61,6 +66,7 @@ const AllVisa = () => {
           <option value="Official Visa">Official Visa</option>
         </select>
       </div>
+
       {loading ? (
         <div className="flex items-center justify-center min-h-screen">
           <HashLoader color="#387478" size={110} />

@@ -77,10 +77,18 @@ const MyVisaApplications = () => {
       </Helmet>
       <h1
         data-aos="zoom-in"
-        className="text-3xl text-center font-bold mb-6 text-primary"
+        className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-6 text-primary"
       >
-        My Visa Applications
+        My Visa Applications 📝✈️
       </h1>
+
+      <p
+        data-aos="zoom-in"
+        className="text-xl w-[90%] md:w-[70%] lg:w-[50%] mx-auto text-center text-gray-500 mb-6"
+      >
+        Track and manage all your visa applications in one place. Stay updated
+        on the status of each application.
+      </p>
       {loading ? (
         <div className="flex items-center justify-center h-screen">
           <HashLoader color="#387478" size={110} />

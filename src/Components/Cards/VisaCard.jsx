@@ -26,7 +26,7 @@ const VisaCard = ({ visa }) => {
     <div
       className={`card shadow-lg rounded-lg border border-gray-200 ${
         theme == "dark" ? "text-white" : "text-black"
-      } ${theme == "dark" ? "bg-gray-950" : "bg-white"}`}
+      } ${theme == "dark" ? "bg-gray-950" : "bg-white"} p-2`}
     >
       <img
         data-aos="fade-up"
