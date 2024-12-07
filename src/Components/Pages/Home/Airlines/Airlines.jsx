@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import BD_Airlines from "../../../../assets/BD_Airlines.png";
 import US_Bangla_Airlines from "../../../../assets/US_Bangla.jpg";
 import Novo_Air from "../../../../assets/novo_air.jpg";
@@ -11,8 +11,9 @@ import Malaysia_Airlines from "../../../../assets/Malaysia_Airlines.jpg";
 import Etihad_Airways from "../../../../assets/Etihad_airways.jpg";
 import Cathay_Pacific_Airways from "../../../../assets/Cathay_Pacific_Airways.jpg";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
+import "aos/dist/aos.css";
+import Aos from "aos";
 const Airlines = () => {
-  // Mock data for airlines
   const airlines = [
     {
       id: 1,
@@ -71,10 +72,17 @@ const Airlines = () => {
     },
   ];
   const { theme } = useContext(AuthContext);
+  useEffect(() => {
+    Aos.init({ duration: 500 });
+  });
   return (
-    <div className={`py-12 ${theme == "dark" ? "text-white" : "text-black"}`}>
-      <div className="container mx-auto px-6 text-center">
-        {/* Section Header */}
+    <div
+      className={`py-12 container mx-auto px-6 text-center ${
+        theme == "dark" ? "text-white" : "text-black"
+      }`}
+    >
+      {/* Section Header */}
+      <div data-aos="zoom-in">
         <h2 className="text-2xl md:text-3xl lg:text-5xl font-extrabold mb-4">
           Search Top Airlines
         </h2>
@@ -82,28 +90,31 @@ const Airlines = () => {
           Our user-friendly platform connects you to top airlines instantly.
           Enjoy a comfortable and hassle-free journey!
         </p>
+      </div>
 
-        {/* Airline Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center gap-2 lg:gap-6">
-          {airlines.map((airline) => (
-            <div
-              key={airline.id}
-              className={`flex items-center justify-between gap-2 ${
-                theme == "dark" ? "bg-gray-900" : "bg-white"
-              } shadow rounded-lg p-2 py-4 lg:p-4 hover:shadow-lg transition`}
-            >
-              <div className="flex items-center justify-between gap-3">
-                <img
-                  src={airline.logo}
-                  alt={airline.name}
-                  className="w-10 h-10 inline-block lg:w-16 lg:h-16 rounded-full"
-                />
-                <span className="inline-block font-medium">{airline.name}</span>
-              </div>
-              <span className="text-primary text-lg font-bold">›</span>
+      {/* Airline Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center gap-2 lg:gap-6">
+        {airlines.map((airline) => (
+          <div
+            key={airline.id}
+            className={`flex items-center justify-between gap-2 ${
+              theme == "dark" ? "bg-gray-900" : "bg-white"
+            } shadow rounded-lg p-2 py-4 lg:p-4 hover:shadow-lg transition`}
+          >
+            <div className="flex items-center justify-between gap-3">
+              <img
+                data-aos="fade-right"
+                src={airline.logo}
+                alt={airline.name}
+                className="w-10 h-10 inline-block lg:w-16 lg:h-16 rounded-full"
+              />
+              <span data-aos="fade-left" className="inline-block font-medium">
+                {airline.name}
+              </span>
             </div>
-          ))}
-        </div>
+            <span className="text-primary text-lg font-bold">›</span>
+          </div>
+        ))}
       </div>
     </div>
   );

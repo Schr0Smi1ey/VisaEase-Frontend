@@ -8,6 +8,8 @@ import { BsCalendarCheck } from "react-icons/bs";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import "aos/dist/aos.css";
+import Aos from "aos";
 
 const MyAddedVisas = () => {
   const { user, Toast, theme } = useContext(AuthContext);
@@ -33,6 +35,7 @@ const MyAddedVisas = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     setSearchTerm("");
+    Aos.init({ duration: 500 });
   }, []);
 
   // Fetch visas added by the logged-in user
@@ -236,19 +239,23 @@ const MyAddedVisas = () => {
       <Helmet>
         <title>VisaEase | My-Visa </title>
       </Helmet>
-      <h1 className="text-3xl text-center font-bold mb-6 text-primary">
+      <h1
+        data-aos="zoom-in"
+        className="text-3xl text-center font-bold mb-6 text-primary"
+      >
         My Added Visas
       </h1>
       {/* Search Bar */}
       <div className="flex flex-col md:flex-row items-center gap-2 mb-6">
         <input
+          data-aos="fade-right"
           type="text"
           value={searchTerm}
           onChange={handleSearchChange}
           placeholder="Search by country name"
           className="input input-bordered w-full md:w-1/2"
         />
-        <div className="flex gap-2">
+        <div data-aos="fade-left" className="flex gap-2">
           <button
             onClick={handleSearch}
             className="bg-green-500 font-bold text-lg rounded-lg px-4 py-2"
@@ -282,11 +289,12 @@ const MyAddedVisas = () => {
               } flex-col rounded-lg shadow-lg p-2 md:p-3 lg:p-4`}
             >
               <img
+                data-aos="fade-up"
                 src={visa.countryImage}
                 alt={visa.countryName}
                 className="border-2 border-gray-100 mx-auto object-cover rounded-lg mb-4"
               />
-              <div className="flex-grow">
+              <div data-aos="fade-up" className="flex-grow">
                 <h3 className="font-bold text-xl mb-2">{visa.countryName}</h3>
                 <p
                   className={`flex flex-wrap items-center gap-2 ${
@@ -331,12 +339,14 @@ const MyAddedVisas = () => {
               </div>
               <div className="flex gap-3 mt-4">
                 <button
+                  data-aos="fade-right"
                   onClick={() => handleDelete(visa._id)}
                   className="px-4 py-1 rounded-md bg-red-500 text-white font-medium"
                 >
                   Delete
                 </button>
                 <button
+                  data-aos="fade-left"
                   onClick={() => handleUpdate(visa)}
                   className="px-4 py-1 bg-sky-500 text-white rounded-md"
                 >

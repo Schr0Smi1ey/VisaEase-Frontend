@@ -4,6 +4,7 @@ import { IoMdEye } from "react-icons/io";
 import { VscEyeClosed } from "react-icons/vsc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import logo from "../../assets/favicon.jpg";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -123,7 +124,11 @@ const SignUp = () => {
       </Helmet>
       <div className="flex bg-white rounded-lg shadow-xl w-full max-w-5xl overflow-hidden">
         {/* Left Side */}
-        <div className="hidden md:flex w-1/2 bg-gradient-to-r from-primary to-primary/70 text-white flex-col items-center justify-center p-8">
+        <div
+          data-aos="fade-right"
+          className="hidden md:flex w-1/2 bg-gradient-to-r from-primary to-primary/70 text-white flex-col items-center justify-center p-8"
+        >
+          <img src={logo} className="w-[75%] mx-auto mb-2 rounded-xl" alt="" />
           <h2 className="text-3xl font-extrabold mb-4">Welcome to VisaEase</h2>
           <p className="text-lg text-center mb-6">
             Join us today and embark on a seamless journey to explore endless
@@ -132,7 +137,10 @@ const SignUp = () => {
         </div>
 
         {/* Right Side */}
-        <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+        <div
+          data-aos="fade-left"
+          className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center"
+        >
           <h2 className="text-4xl font-extrabold text-primary mb-6 text-center">
             Create Account
           </h2>

@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
+import "aos/dist/aos.css";
+import Aos from "aos";
 
 const BestDestinations = () => {
   const destinations = [
@@ -40,9 +42,16 @@ const BestDestinations = () => {
     },
   ];
   const { theme } = useContext(AuthContext);
+  useEffect(() => {
+    Aos.init({ duration: 500 });
+  });
   return (
-    <div className={`py-12 ${theme == "dark" ? "text-white" : "text-black"}`}>
-      <div className="container mx-auto px-6">
+    <div
+      className={`py-12 container mx-auto px-6 ${
+        theme == "dark" ? "text-white" : "text-black"
+      }`}
+    >
+      <div data-aos="fade-down">
         <h2 className="text-2xl md:text-3xl lg:text-5xl font-extrabold mb-4 text-center">
           Most Popular Destinations
         </h2>
@@ -50,37 +59,41 @@ const BestDestinations = () => {
           Expand your travel horizons with new facets! Explore the world by
           choosing your ideal travel destinations.
         </p>
-        <Swiper
-          modules={[Navigation, Pagination]}
-          spaceBetween={20}
-          slidesPerView={1}
-          navigation
-          pagination={{ clickable: true }}
-          breakpoints={{
-            640: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-          }}
-        >
-          {destinations.map((destination) => (
-            <SwiperSlide key={destination.id}>
-              <div className="relative rounded-xl overflow-hidden shadow-lg">
-                <img
-                  src={destination.img}
-                  alt={destination.title}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4">
-                  <h3 className="text-white text-lg font-semibold">
-                    {destination.title}
-                  </h3>
-                  <p className="text-gray-300 text-sm">{destination.hotels}</p>
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
       </div>
+      <Swiper
+        modules={[Navigation, Pagination]}
+        spaceBetween={20}
+        slidesPerView={1}
+        navigation
+        pagination={{ clickable: true }}
+        breakpoints={{
+          640: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        }}
+      >
+        {destinations.map((destination) => (
+          <SwiperSlide key={destination.id}>
+            <div className="relative rounded-xl overflow-hidden shadow-lg">
+              <img
+                data-aos="zoom-in"
+                src={destination.img}
+                alt={destination.title}
+                className="w-full h-64 object-cover"
+              />
+              <div
+                data-aos="fade-up"
+                className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4"
+              >
+                <h3 className="text-white text-lg font-semibold">
+                  {destination.title}
+                </h3>
+                <p className="text-gray-300 text-sm">{destination.hotels}</p>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 };

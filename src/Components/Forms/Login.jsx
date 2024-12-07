@@ -4,6 +4,7 @@ import { IoMdEye } from "react-icons/io";
 import { VscEyeClosed } from "react-icons/vsc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import logo from "../../assets/favicon.jpg";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -69,6 +70,7 @@ const Login = () => {
           className="hidden md:flex md:w-1/2 bg-primary text-white flex-col items-center justify-center p-8"
           data-aos="fade-right"
         >
+          <img src={logo} className="w-[75%] mx-auto mb-2 rounded-xl" alt="" />
           <h2 className="text-4xl font-bold mb-4">Welcome Back!</h2>
           <p className="text-center text-lg">
             Log in to VisaEase and simplify your visa application process with

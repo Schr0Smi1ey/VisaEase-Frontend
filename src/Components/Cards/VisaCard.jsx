@@ -4,8 +4,10 @@ import { BiTimeFive } from "react-icons/bi";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { BsCalendarCheck } from "react-icons/bs";
 import { FaClipboardList } from "react-icons/fa";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
+import "aos/dist/aos.css";
+import Aos from "aos";
 const VisaCard = ({ visa }) => {
   const {
     countryImage,
@@ -17,6 +19,9 @@ const VisaCard = ({ visa }) => {
     applicationMethod,
   } = visa;
   const { theme } = useContext(AuthContext);
+  useEffect(() => {
+    Aos.init({ duration: 500 });
+  });
   return (
     <div
       className={`card shadow-lg rounded-lg border border-gray-200 ${
@@ -24,11 +29,12 @@ const VisaCard = ({ visa }) => {
       } ${theme == "dark" ? "bg-gray-950" : "bg-white"}`}
     >
       <img
+        data-aos="fade-up"
         src={countryImage}
         alt={`${countryName} Visa`}
         className="rounded-t-lg object-cover h-3/4"
       />
-      <div className="p-4 flex flex-col">
+      <div data-aos="slide-up" className="p-4 flex flex-col">
         <h2 className="text-xl font-semibold text-primary mb-2">
           {countryName}
         </h2>

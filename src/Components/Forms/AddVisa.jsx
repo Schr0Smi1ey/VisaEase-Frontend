@@ -4,6 +4,8 @@ import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import "aos/dist/aos.css";
+import Aos from "aos";
 
 const AddVisa = () => {
   const [visaData, setVisaData] = useState({
@@ -79,6 +81,7 @@ const AddVisa = () => {
   };
   useEffect(() => {
     window.scrollTo(0, 0);
+    Aos.init({ duration: 500 });
   }, []);
   return (
     <div
@@ -89,7 +92,10 @@ const AddVisa = () => {
       <Helmet>
         <title>VisaEase | Add-Visa</title>
       </Helmet>
-      <h1 className="text-3xl font-bold text-center mb-8 text-primary">
+      <h1
+        data-aos="zoom-in"
+        className="text-3xl font-bold text-center mb-8 text-primary"
+      >
         Add Visa
       </h1>
       <form
@@ -98,7 +104,7 @@ const AddVisa = () => {
           theme == "dark" ? "bg-gray-950" : "bg-white"
         } shadow-lg rounded-lg p-6 max-w-3xl mx-auto`}
       >
-        <div className="mb-4">
+        <div data-aos="fade-up" className="mb-4">
           <label
             className="block text-lg font-semibold mb-2"
             htmlFor="countryImage"
@@ -117,7 +123,7 @@ const AddVisa = () => {
           />
         </div>
 
-        <div className="mb-4">
+        <div data-aos="fade-up" className="mb-4">
           <label
             className="block text-lg font-semibold mb-2"
             htmlFor="countryName"
@@ -136,7 +142,7 @@ const AddVisa = () => {
           />
         </div>
 
-        <div className="mb-4 w-full">
+        <div data-aos="fade-up" className="mb-4 w-full">
           <label
             className="block text-lg font-semibold mb-2"
             htmlFor="visaType"
@@ -160,7 +166,7 @@ const AddVisa = () => {
           </select>
         </div>
 
-        <div className="mb-4">
+        <div data-aos="fade-up" className="mb-4">
           <label
             className="block text-lg font-semibold mb-2"
             htmlFor="processingTime"
@@ -179,7 +185,7 @@ const AddVisa = () => {
           />
         </div>
 
-        <div className="mb-4">
+        <div data-aos="fade-up" className="mb-4">
           <label className="block text-lg font-semibold mb-2">
             Required Documents
           </label>
@@ -217,7 +223,7 @@ const AddVisa = () => {
           </div>
         </div>
 
-        <div className="mb-4">
+        <div data-aos="fade-up" className="mb-4">
           <label
             className="block text-lg font-semibold mb-2"
             htmlFor="description"
@@ -235,7 +241,7 @@ const AddVisa = () => {
           />
         </div>
 
-        <div className="mb-4">
+        <div data-aos="fade-up" className="mb-4">
           <label
             className="block text-lg font-semibold mb-2"
             htmlFor="ageRestriction"
@@ -253,7 +259,7 @@ const AddVisa = () => {
           />
         </div>
 
-        <div className="mb-4">
+        <div data-aos="fade-up" className="mb-4">
           <label className="block text-lg font-semibold mb-2" htmlFor="fee">
             Visa Fee
           </label>
@@ -269,7 +275,7 @@ const AddVisa = () => {
           />
         </div>
 
-        <div className="mb-4">
+        <div data-aos="fade-up" className="mb-4">
           <label
             className="block text-lg font-semibold mb-2"
             htmlFor="validity"
@@ -288,7 +294,7 @@ const AddVisa = () => {
           />
         </div>
 
-        <div className="mb-4">
+        <div data-aos="fade-up" className="mb-4">
           <label
             className="block text-lg font-semibold mb-2"
             htmlFor="applicationMethod"
@@ -308,6 +314,7 @@ const AddVisa = () => {
         </div>
 
         <button
+          data-aos="fade-up"
           type="submit"
           className="btn bg-primary/[130] text-xl w-full mt-4 text-white font-bold"
         >
