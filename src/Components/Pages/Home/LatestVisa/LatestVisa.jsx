@@ -25,7 +25,7 @@ const LatestVisas = () => {
       <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-center mb-8">
         Latest Visa visas
       </h2>
-      <div className="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         {visas.map((visa) => (
           <VisaCard key={visa._id} visa={visa} />
         ))}
