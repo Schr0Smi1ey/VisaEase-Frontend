@@ -55,7 +55,7 @@ const ForgotPassword = () => {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+              className="w-full px-3 py-2 border focus:border-none rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               placeholder="Enter your email"
               required
             />
@@ -63,7 +63,7 @@ const ForgotPassword = () => {
           <button
             data-aos="fade-up"
             type="submit"
-            className="w-full bg-green-500 text-white font-bold py-2 rounded-lg hover:bg-green-600"
+            className="w-full bg-primary text-white font-bold py-2 rounded-lg hover:bg-primary/[150]"
           >
             Reset Password
           </button>
