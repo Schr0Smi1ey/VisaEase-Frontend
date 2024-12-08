@@ -14,6 +14,7 @@ import PrivateRoute from "./PrivateRoute/PrivateRoute.jsx";
 import VisaDetails from "./Components/Pages/VisaDetails/VisaDetails.jsx";
 import ErrorPage from "./Components/Shared/Errorpage/Errorpage.jsx";
 import Login from "./Components/Forms/Login.jsx";
+import ForgotPassword from "./Components/Forms/ForgotPassword.jsx";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`https://visaease.vercel.app/Visa/${params.id}`),
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPassword></ForgotPassword>,
       },
     ],
   },
