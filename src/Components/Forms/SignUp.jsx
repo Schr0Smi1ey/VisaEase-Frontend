@@ -53,6 +53,7 @@ const SignUp = () => {
     creationTime,
     lastSignInTime
   ) => {
+    console.log(email, name, photoURL, creationTime, lastSignInTime);
     fetch("https://visaease.vercel.app/Users", {
       method: "POST",
       headers: {
@@ -65,7 +66,7 @@ const SignUp = () => {
         creationTime,
         lastSignInTime,
       }),
-    });
+    }).then((res) => console.log(res));
   };
   const handleSubmit = (e) => {
     e.preventDefault();
