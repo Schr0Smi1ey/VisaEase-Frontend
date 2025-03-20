@@ -1,5 +1,8 @@
 import { useContext, useEffect, useState } from "react";
+<<<<<<< HEAD
 import { toast } from "react-toastify";
+=======
+>>>>>>> 2e19745a7717859360a72876660a56ba08fb3934
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2/dist/sweetalert2.js";
